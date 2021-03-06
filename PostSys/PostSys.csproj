@@ -169,13 +169,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
-    <Compile Include="Controllers\AssignemntsController.cs" />
+    <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\DeadlinesController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +204,18 @@
     <Compile Include="Migrations\202103061102303_AddAssignmentTable.Designer.cs">
       <DependentUpon>202103061102303_AddAssignmentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103061237545_AddPostTable.cs" />
+    <Compile Include="Migrations\202103061237545_AddPostTable.Designer.cs">
+      <DependentUpon>202103061237545_AddPostTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103061253209_AddPostTable1.cs" />
+    <Compile Include="Migrations\202103061253209_AddPostTable1.Designer.cs">
+      <DependentUpon>202103061253209_AddPostTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103061329369_AddPostTable2.cs" />
+    <Compile Include="Migrations\202103061329369_AddPostTable2.Designer.cs">
+      <DependentUpon>202103061329369_AddPostTable2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -213,10 +226,12 @@
     <Compile Include="Models\Faculty.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CoordinatorFacultyViewModel.cs" />
     <Compile Include="ViewModels\CourseDeadlineViewModel.cs" />
+    <Compile Include="ViewModels\PostAssignmentViewModel.cs" />
     <Compile Include="ViewModels\StudentClassViewModel.cs" />
     <Compile Include="ViewModels\UserInRolesViewModel.cs" />
   </ItemGroup>
@@ -290,14 +305,17 @@
     <Content Include="Views\Deadlines\ListDeadline.cshtml" />
     <Content Include="Views\Deadlines\CreateDeadline.cshtml" />
     <Content Include="Views\Courses\CreateAssignment.cshtml" />
-    <Content Include="Views\Assignemnts\ListAssignment.cshtml" />
-    <None Include="Views\Assignemnts\ManageMyAssignemntCoordinator.cshtml.bak" />
-    <None Include="Views\Assignemnts\ManageMyAssignemntStudent.cshtml.bak" />
-    <Content Include="Views\Assignemnts\ManageMyAssignemt.cshtml" />
+    <Content Include="Views\Assignments\ListAssignment.cshtml" />
+    <Content Include="Views\Assignments\ManageMyAssignment.cshtml" />
+    <Content Include="Views\Assignments\PostTopic.cshtml" />
+    <Content Include="Views\ErrorValidations\Exist.cshtml" />
+    <Content Include="Views\ErrorValidations\Null.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Posts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -330,6 +348,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103061102303_AddAssignmentTable.resx">
       <DependentUpon>202103061102303_AddAssignmentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103061237545_AddPostTable.resx">
+      <DependentUpon>202103061237545_AddPostTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103061253209_AddPostTable1.resx">
+      <DependentUpon>202103061253209_AddPostTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103061329369_AddPostTable2.resx">
+      <DependentUpon>202103061329369_AddPostTable2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

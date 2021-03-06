@@ -89,7 +89,10 @@ namespace PostSys.Controllers
 		{
 			var getCurrentStudentId = User.Identity.GetUserId();
 
-			var getMyCourse = _context.Courses.Where(s => s.StudentId == getCurrentStudentId).Include(c => c.Class).Include(s => s.Student).ToList();
+			var getMyCourse = _context.Courses.Where(s => s.StudentId == getCurrentStudentId)
+											  .Include(c => c.Class)
+											  .Include(s => s.Student)
+											  .ToList();
 
 			return View(getMyCourse);
 		}
