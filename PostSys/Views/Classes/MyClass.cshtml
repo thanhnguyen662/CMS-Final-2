@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PostSys.Models.Class>
+@{
+	ViewBag.Title = "MyClass";
+}
+
+<h2>ListClasses</h2>
+
+@using (Html.BeginForm("MyClass", "Classes", FormMethod.Get))
+{
+	<table class="table table-hover">
+		<tr>
+			<th>Name</th>
+			<th>Coordinator Name</th>
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Name</td>
+				<td>@item.Faculty.Name</td>
+			</tr>
+		}
+	</table>
+}

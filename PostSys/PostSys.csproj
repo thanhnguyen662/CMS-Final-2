@@ -272,6 +272,9 @@
     <Content Include="Views\Classes\CreateClass.cshtml" />
     <Content Include="Views\Courses\ListCourses.cshtml" />
     <Content Include="Views\Courses\CreateCourse.cshtml" />
+    <Content Include="Views\Classes\MyClass.cshtml" />
+    <Content Include="Views\Courses\MyCourse.cshtml" />
+    <Content Include="Views\Courses\ManageMyCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

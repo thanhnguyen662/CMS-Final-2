@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using PostSys.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace PostSys.Controllers
 {
@@ -74,6 +75,15 @@ namespace PostSys.Controllers
 			_context.SaveChanges();
 
 			return RedirectToAction("ListClasses");
+		}
+
+		[HttpGet]
+		public ActionResult MyClass()
+		{
+			var getcurrentCoordinatorId = User.Identity.GetUserId();
+			var getMyCourse = _context.Classes.Where(c => c.CoordinatorId == getcurrentCoordinatorId).Include(c => c.Coordinator).Include(f => f.Faculty);
+
+			return View(getMyCourse);
 		}
 	}
 }
