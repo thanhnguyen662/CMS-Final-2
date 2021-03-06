@@ -1,0 +1,32 @@
+﻿@model PostSys.Models.Deadline
+@{
+	ViewBag.Title = "CreateDeadline";
+}
+
+<h2>CreateDeadline</h2>
+
+@using (Html.BeginForm("CreateDeadline", "Deadlines", FormMethod.Post))
+{
+	@Html.HiddenFor(i => i.Id)
+
+	<div class="form-group">
+		@Html.LabelFor(p => p.Name)
+		@Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(p => p.StartDate)
+		@Html.TextBoxFor(p => p.StartDate, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.StartDate, "", new { @class = "text-danger" })
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(p => p.EndDate)
+		@Html.TextBoxFor(p => p.EndDate, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.EndDate, "", new { @class = "text-danger" })
+	</div>
+
+
+	<button type="submit" class="btn btn-primary">Assign more</button>
+}

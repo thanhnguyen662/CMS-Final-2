@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\DeadlinesController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -193,10 +194,14 @@
     <Compile Include="Migrations\202103060934234_AddCourseTable.Designer.cs">
       <DependentUpon>202103060934234_AddCourseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103061042575_AddDeadlineTable.cs" />
+    <Compile Include="Migrations\202103061042575_AddDeadlineTable.Designer.cs">
+      <DependentUpon>202103061042575_AddDeadlineTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\Assignment.cs" />
+    <Compile Include="Models\Deadline.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Faculty.cs" />
@@ -275,6 +280,8 @@
     <Content Include="Views\Classes\MyClass.cshtml" />
     <Content Include="Views\Courses\MyCourse.cshtml" />
     <Content Include="Views\Courses\ManageMyCourse.cshtml" />
+    <Content Include="Views\Deadlines\ListDeadline.cshtml" />
+    <Content Include="Views\Deadlines\CreateDeadline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103060934234_AddCourseTable.resx">
       <DependentUpon>202103060934234_AddCourseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103061042575_AddDeadlineTable.resx">
+      <DependentUpon>202103061042575_AddDeadlineTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

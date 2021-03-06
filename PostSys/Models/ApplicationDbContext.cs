@@ -13,6 +13,7 @@ namespace PostSys.Models
 		public DbSet<Faculty> Faculties { get; set; }
 		public DbSet<Class> Classes { get; set; }
 		public DbSet<Course> Courses { get; set; }
+		public DbSet<Deadline> Deadlines { get; set; }
 
 		public static ApplicationDbContext Create()
 		{
