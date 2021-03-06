@@ -103,7 +103,39 @@ namespace PostSys.Controllers
 			var getCourseOfCoordinator = _context.Courses.Where(c => c.Class.Coordinator.UserName == getCurrentCoordinatorUserName).Include(c => c.Class).ToList();
 
 			return View(getCourseOfCoordinator);
+		}
 
+		//Coordinator
+		public ActionResult CreateAssignment(int id)
+		{
+			var getCourseInDb = _context.Courses.SingleOrDefault(c => c.Id == id);
+			var getDeadline = _context.Deadlines.ToList();
+
+			var dropDownListDeadlineCourse = new CourseDeadlineViewModel
+			{
+				Course = getCourseInDb,
+				Deadlines = getDeadline,
+			};
+
+			return View(dropDownListDeadlineCourse);
+		}
+
+		[HttpPost]
+		public ActionResult CreateAssignment(Assignment assignment, int id)
+		{
+			var getCourseInDb = _context.Courses.SingleOrDefault(c => c.Id == id);
+
+			var newAssignment = new Assignment
+			{
+				CourseId = getCourseInDb.Id,
+				Name = assignment.Name,
+				DeadlineId = assignment.DeadlineId,
+			};
+
+			_context.Assignments.Add(newAssignment);
+			_context.SaveChanges();
+
+			return RedirectToAction("ManageMyCourse");
 		}
 	}
 }

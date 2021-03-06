@@ -1,0 +1,25 @@
+﻿@model PostSys.ViewModels.CourseDeadlineViewModel
+@{
+	ViewBag.Title = "CreateAssignment";
+}
+
+<h2>CreateAssignment</h2>
+
+@using (Html.BeginForm("CreateAssignment", "Courses", FormMethod.Post))
+{
+	<div class="form-group">
+		@Html.LabelFor(p => p.Assignment.Name)
+		@Html.TextBoxFor(p => p.Assignment.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.Assignment.Name, "", new { @class = "text-danger" })
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Assignment.DeadlineId)
+		@Html.DropDownListFor(m => m.Assignment.DeadlineId,
+			new SelectList(Model.Deadlines, "Id", "Name"), "Select Deadline",
+			new { @class = "form-control" }
+		)
+	</div>
+
+	<button type="submit" class="btn btn-primary">Assign more</button>
+}
