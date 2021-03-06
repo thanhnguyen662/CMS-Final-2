@@ -80,11 +80,11 @@ namespace PostSys
             }
 
 
-            // creating Creating Marketing Coodinator role     
-            if (!roleManager.RoleExists("Marketing Coodinator"))
+            // creating Creating Marketing Coordinator role     
+            if (!roleManager.RoleExists("Marketing Coordinator"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Marketing Coodinator";
+                role.Name = "Marketing Coordinator";
                 roleManager.Create(role);
 
             }

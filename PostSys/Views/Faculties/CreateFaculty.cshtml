@@ -1,0 +1,19 @@
+﻿@model PostSys.Models.Faculty
+@{
+	ViewBag.Title = "CreateFaculty";
+}
+
+<h2>CreateFaculty</h2>
+
+@using (Html.BeginForm("CreateFaculty", "Faculties", FormMethod.Post))
+{
+	@Html.HiddenFor(i => i.Id)
+
+	<div class="form-group">
+		@Html.LabelFor(p => p.Name)
+		@Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
+	</div>
+
+	<button type="submit" class="btn btn-primary">Assign more</button>
+}

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PostSys.Models.Course>
+@{
+	ViewBag.Title = "ListCourses";
+}
+
+<h2>ListCourse</h2>
+
+@using (Html.BeginForm("ListCourses", "Courses", FormMethod.Get))
+{
+	<table class="table table-hover">
+		<tr>
+			<th>Course Name</th>
+			<th>Class Name</th>
+			<th>Student Name</th>
+			<th>Delete</th>
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Name</td>
+				<td>@item.Class.Name</td>
+				<td>@item.Student.Email</td>
+				<td>@Html.ActionLink("Delete", "DeleteCourse", new { id = item.Id })</td>
+			</tr>
+		}
+	</table>
+}
