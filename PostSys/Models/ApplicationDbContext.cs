@@ -16,6 +16,8 @@ namespace PostSys.Models
 		public DbSet<Deadline> Deadlines { get; set; }
 		public DbSet<Assignment> Assignments { get; set; }
 		public DbSet<Post> Posts { get; set; }
+		public DbSet<Publication> Publications{ get; set; }
+		public DbSet<Comment> Comments { get; set; }
 
 		public static ApplicationDbContext Create()
 		{

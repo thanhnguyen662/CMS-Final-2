@@ -82,10 +82,28 @@ namespace PostSys.Controllers
 		{
 			var assignemntInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
 
+			////////check validation: Deadline currentdate > EndDate
+			//Find Enddate in currentDeadline
+			int status = 1; // st=1 => can submit /// st=0 => can't submit
+			var endDateList = (from ass in _context.Assignments
+							   where ass.Id == id
+							   join d in _context.Deadlines
+							   on ass.DeadlineId equals d.Id
+							   select d.EndDate).ToList();
+			var endDate = endDateList[0];
+
+			//check deadline
+			if (DateTime.Now > endDate) //error
+			{
+				status = 0;
+			}
+
+			//
 
 			var newPostAssignmentViewModel = new PostAssignmentViewModel
 			{
 				Assignment = assignemntInDb,
+				StatusPost = status
 			};
 
 			return View(newPostAssignmentViewModel);

@@ -31,6 +31,11 @@ namespace PostSys.Controllers
         [HttpPost]
         public ActionResult CreateDeadline(Deadline deadline)
         {
+            if (deadline.StartDate >= deadline.EndDate)
+            {
+                return View("~/Views/ErrorValidations/Null.cshtml");
+            }
+
             var createNewDeadline = new Deadline
             {
                 Name = deadline.Name,

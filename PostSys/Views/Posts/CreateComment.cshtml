@@ -1,0 +1,17 @@
+﻿@model PostSys.ViewModels.CommentPostViewModel
+@{
+	ViewBag.Title = "CreateComment";
+}
+
+<h2>CreateComment</h2>
+
+@using (Html.BeginForm("CreateComment", "Posts", FormMethod.Post))
+{
+	<div class="form-group">
+		@Html.LabelFor(p => p.Comment.Description)
+		@Html.TextBoxFor(p => p.Comment.Description, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.Comment.Description, "", new { @class = "text-danger" })
+	</div>
+
+	<button type="submit" class="btn btn-primary">Assign</button>
+}

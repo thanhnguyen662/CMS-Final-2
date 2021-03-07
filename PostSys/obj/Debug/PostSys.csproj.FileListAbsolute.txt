@@ -226,3 +226,5 @@ C:\Users\Thanh Nguyen\Source\Repos\CMS-Final-2\PostSys\obj\Debug\PostSys.Migrati
 C:\Users\Thanh Nguyen\source\repos\CMS-Final-2\PostSys\obj\Debug\PostSys.Migrations.AddPostTable.resources
 C:\Users\Thanh Nguyen\source\repos\CMS-Final-2\PostSys\obj\Debug\PostSys.Migrations.AddPostTable1.resources
 C:\Users\Thanh Nguyen\source\repos\CMS-Final-2\PostSys\obj\Debug\PostSys.Migrations.AddPostTable2.resources
+C:\Users\Thanh Nguyen\Source\Repos\CMS-Final-2\PostSys\obj\Debug\PostSys.Migrations.AddPublicationTable.resources
+C:\Users\Thanh Nguyen\Source\Repos\CMS-Final-2\PostSys\obj\Debug\PostSys.Migrations.AddCommentTable.resources

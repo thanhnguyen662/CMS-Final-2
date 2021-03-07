@@ -13,5 +13,7 @@ namespace PostSys.ViewModels
 
 		public IEnumerable<Assignment> Assignments { get; set; }
 		public IEnumerable<Post> Posts { get; set; }
+
+		public int StatusPost { get; set; }
 	}
 }

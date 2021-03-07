@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Net;
 using Microsoft.AspNet.Identity;
+using PostSys.ViewModels;
 
 namespace PostSys.Controllers
 {
@@ -77,6 +78,7 @@ namespace PostSys.Controllers
 			return File(getFileById.File, "file", getFileById.UrlFile);
 		}
 
+
 		public bool SendEmail(string toEmail, string emailSubject, string emailBody)
 		{
 
@@ -133,6 +135,140 @@ namespace PostSys.Controllers
 
 
 			return Json(result, JsonRequestBehavior.AllowGet);
+		}
+
+		public ActionResult ListPublication()
+		{
+			var getAssignmentCourse = _context.Assignments.Include(c => c.Course).ToList();
+			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();
+
+			var getPublication = _context.Publications.Include(p => p.Post).ToList();
+
+			return View(getPublication);
+		}
+
+		public ActionResult CreatePublication(int id)
+		{
+			var getPostId = _context.Posts.SingleOrDefault(i => i.Id == id);
+
+			var newPublication = new Publication
+			{
+				PostId = getPostId.Id
+			};
+
+			_context.Publications.Add(newPublication);
+			_context.SaveChanges();
+			return RedirectToAction("ManageMyPost");
+		}
+
+		public ActionResult DeletePublication(int id)
+		{
+			var publicationInDb = _context.Publications.SingleOrDefault(i => i.Id == id);
+
+			_context.Publications.Remove(publicationInDb);
+			_context.SaveChanges();
+
+			return RedirectToAction("ManageMyPublication");
+		}
+
+		public ActionResult ManageMyPublication()
+		{
+			var getCurrentUserName = User.Identity.GetUserName();
+			var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
+			var getCourseClass = _context.Courses.Include(c => c.Class).Include(s => s.Student).ToList();
+			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();
+
+			if(User.IsInRole("Marketing Coordinator"))
+			{
+				var getMyPublication = _context.Publications.Where(u => u.Post.Assignment.Course.Class.Coordinator.UserName == getCurrentUserName)
+															.Include(p => p.Post)
+															.ToList();
+				return View(getMyPublication);
+			}
+
+			if (User.IsInRole("Student"))
+			{
+				var getMyPublication = _context.Publications.Where(u => u.Post.Assignment.Course.Student.UserName == getCurrentUserName)
+															.Include(p => p.Post)
+															.ToList();
+				return View(getMyPublication);
+			}
+
+			return View();
+		}
+
+		public ActionResult ListComment()
+		{
+			var getComment = _context.Comments.Include(p => p.Post).ToList();
+
+			var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
+			var getAssignmentCourse = _context.Assignments.Include(c => c.Course).ToList();
+			var getCourseClassStudent = _context.Courses.Include(s => s.Student).Include(c => c.Class).ToList();
+			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();
+
+			return View(getComment);
+		}
+
+		public ActionResult CreateComment()
+		{
+
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult CreateComment(Comment comment, int id)
+		{
+			var postInDb = _context.Posts.SingleOrDefault(i => i.Id == id);
+
+			var newComment = new Comment
+			{
+				Description = comment.Description,
+				PostId = postInDb.Id
+			};
+
+			_context.Comments.Add(newComment);
+			_context.SaveChanges();
+
+			return RedirectToAction("ListComment");
+		}
+
+		public ActionResult ManageMyComment()
+		{
+			var getCurrentUserName = User.Identity.GetUserName();
+
+			var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
+			var getAssignmentCourse = _context.Assignments.Include(c => c.Course).ToList();
+			var getCourseClassStudent = _context.Courses.Include(s => s.Student).Include(c => c.Class).ToList();
+			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();
+
+			if (User.IsInRole("Marketing Coordinator"))
+			{
+				var getMyCommentCoordinator = _context.Comments.Where(u => u.Post.Assignment.Course.Class.Coordinator.UserName == getCurrentUserName)
+															   .Include(p => p.Post)
+															   .ToList();
+
+				return View(getMyCommentCoordinator);
+			}
+
+			if (User.IsInRole("Student"))
+			{
+				var getMyCommentCoordinator = _context.Comments.Where(u => u.Post.Assignment.Course.Student.UserName == getCurrentUserName)
+															   .Include(p => p.Post)
+															   .ToList();
+
+				return View(getMyCommentCoordinator);
+			}
+
+			return View();
+		}
+		public ActionResult DeleteComment(int id)
+		{
+			var commentInDb = _context.Comments.SingleOrDefault(i => i.Id == id);
+
+			_context.Comments.Remove(commentInDb);
+			_context.SaveChanges();
+
+			return RedirectToAction("ManageMyComment");
 		}
 	}
 }

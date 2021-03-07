@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PostSys.Models.Publication>
+
+@{
+	ViewBag.Title = "ManageMyPublication";
+}
+
+<h2>ManageMyPublication</h2>
+
+@using (Html.BeginForm("ManageMyPublication", "Posts", FormMethod.Get))
+{
+	<table class="table table-hover">
+		<tr>
+			<th>Posts Name</th>
+			<th>Assignment Name</th>
+			<th>Course Name</th>
+			<th>Class Name</th>
+			<th>Coordinator Name</th>
+			@if (User.IsInRole("Marketing Coordinator"))
+			{
+				<th>Delete</th>
+
+			}
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Post.Name</td>
+				<td>@item.Post.Assignment.Name</td>
+				<td>@item.Post.Assignment.Course.Name</td>
+				<td>@item.Post.Assignment.Course.Class.Name</td>
+				<td>@item.Post.Assignment.Course.Class.Coordinator.UserName</td>
+				@if(User.IsInRole("Marketing Coordinator"))
+				{
+					<td>@Html.ActionLink("Delete", "DeletePublication", new { id = item.Id })</td>
+
+				}
+			</tr>
+		}
+	</table>
+}

@@ -21,7 +21,6 @@
 				<th>Download File</th>
 			}
 
-			<th>Download File</th>
 		</tr>
 		@foreach (var item in Model)
 		{
@@ -35,6 +34,12 @@
 				@if(User.IsInRole("Student"))
 				{
 					<td>@Html.ActionLink("Download", "DownloadFile", new { id = item.Id })</td>
+				}
+
+				@if(User.IsInRole("Marketing Coordinator"))
+				{
+					<td>@Html.ActionLink("AddPublication", "CreatePublication", new { id = item.Id })</td>
+					<td>@Html.ActionLink("AddComment", "CreateComment", new { id = item.Id })</td>
 				}
 			</tr>
 		}
