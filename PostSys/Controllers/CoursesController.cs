@@ -51,10 +51,20 @@ namespace PostSys.Controllers
 		[HttpPost]
 		public ActionResult CreateCourse(Course course)
 		{
+			var getClass = _context.Classes.ToList();
+			var getCurrentUser = User.Identity.GetUserName();
+
+			var getClassIds = _context.Classes.Where(u => u.Coordinator.UserName == getCurrentUser)
+											  .Include(c => c.Coordinator)
+											  .Include(c => c. Faculty)
+											  .Select(u => u.Id)
+											  .ToList();
+			var getClassId = getClassIds[0];	
+
 			var newCourse = new Course
 			{
 				Name = course.Name,
-				ClassId = course.ClassId,
+				ClassId = getClassId,
 				StudentId = course.StudentId
 			};
 			_context.Courses.Add(newCourse);

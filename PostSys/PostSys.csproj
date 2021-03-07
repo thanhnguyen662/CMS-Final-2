@@ -307,15 +307,16 @@
     <Content Include="Views\Courses\CreateAssignment.cshtml" />
     <Content Include="Views\Assignments\ListAssignment.cshtml" />
     <Content Include="Views\Assignments\ManageMyAssignment.cshtml" />
-    <Content Include="Views\Assignments\PostTopic.cshtml" />
+    <Content Include="Views\Assignments\SubmitPost.cshtml" />
     <Content Include="Views\ErrorValidations\Exist.cshtml" />
     <Content Include="Views\ErrorValidations\Null.cshtml" />
+    <Content Include="Views\Posts\ListPost.cshtml" />
+    <Content Include="Views\Posts\ManageMyPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Posts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -22,12 +22,59 @@ namespace PostSys.Controllers
 			_context = new ApplicationDbContext();
 		}
 
-		// manager
+		//manager
 		public ActionResult ListPost()
 		{
+			var listAssignment = _context.Assignments.Include(d => d.Deadline).Include(c => c.Course).ToList();
+
 			var getPost = _context.Posts.Include(a => a.Assignment).ToList();
 			
 			return View(getPost);
+		}
+
+		public ActionResult DeletePost(int id)
+		{
+			var postInDb = _context.Posts.SingleOrDefault(i => i.Id == id);
+
+			_context.Posts.Remove(postInDb);
+			_context.SaveChanges();
+
+			return RedirectToAction("ListPost");
+		}
+
+		public ActionResult ManageMyPost()
+		{
+			var getDeadline = _context.Deadlines.ToList();
+			var getCourse = _context.Courses.ToList();
+
+			var getCurrentUserName = User.Identity.GetUserName();
+
+			if(User.IsInRole("Marketing Coordinator"))
+			{
+				var getMyPostCoordinator = _context.Posts.Where(u => u.Assignment.Course.Class.Coordinator.UserName == getCurrentUserName)
+														 .Include(a => a.Assignment)
+														 .ToList();
+				return View(getMyPostCoordinator);
+			}
+
+			if (User.IsInRole("Student"))
+			{
+				var getMyPostStudent = _context.Posts.Where(u => u.Assignment.Course.Student.UserName == getCurrentUserName)
+													 .Include(a => a.Assignment)
+													 .ToList();
+
+				return View(getMyPostStudent);
+			}
+
+			return View();
+		}
+
+		public FileResult DownloadFile(Post post)
+		{
+
+			var getFileById = _context.Posts.SingleOrDefault(c => c.Id == post.Id);
+
+			return File(getFileById.File, "file", getFileById.UrlFile);
 		}
 
 		public bool SendEmail(string toEmail, string emailSubject, string emailBody)

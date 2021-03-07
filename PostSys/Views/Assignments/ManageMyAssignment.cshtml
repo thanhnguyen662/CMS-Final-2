@@ -34,12 +34,11 @@
 				@if (User.IsInRole("Marketing Coordinator"))
 				{
 					<td>@Html.ActionLink("Delete", "DeleteAssignment", new { id = item.Id })</td>
-					<td>@Html.ActionLink("Download", "Download", new { id = item.Id })</td>
 				}
 
 				@if (User.IsInRole("Student"))
 				{
-					<td>@Html.ActionLink("Submit", "PostTopic", new { id = item.Id })</td>
+					<td>@Html.ActionLink("Submit", "SubmitPost", new { id = item.Id })</td>
 				}
 			</tr>
 		}

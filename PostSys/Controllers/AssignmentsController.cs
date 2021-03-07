@@ -78,7 +78,7 @@ namespace PostSys.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult PostTopic(int id)
+		public ActionResult SubmitPost(int id)
 		{
 			var assignemntInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
 
@@ -93,7 +93,7 @@ namespace PostSys.Controllers
 
 		
 		[HttpPost]
-		public ActionResult PostTopic([Bind(Include = "Name, Status, File, UrlFile, PostDate, NameOfFile")] HttpPostedFileBase file, Post post, Assignment assignment, int id)
+		public ActionResult SubmitPost([Bind(Include = "Name, Status, File, UrlFile, PostDate, NameOfFile")] HttpPostedFileBase file, Post post, Assignment assignment, int id)
 		{
 			string extension = Path.GetExtension(file.FileName);
 
@@ -149,14 +149,6 @@ namespace PostSys.Controllers
 			_context.SaveChanges();
 
 			return View("~/Views/Home/Index.cshtml");
-		}
-
-		public FileResult Download(Post post)
-		{
-
-			var getFileById = _context.Posts.SingleOrDefault(c => c.Id == post.Id);
-
-			return File(getFileById.File, "file", getFileById.UrlFile);
 		}
 	}
 }

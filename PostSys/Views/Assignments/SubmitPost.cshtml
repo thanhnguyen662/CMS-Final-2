@@ -1,0 +1,39 @@
+﻿@model PostSys.ViewModels.PostAssignmentViewModel
+@{
+	ViewBag.Title = "SubmitPost";
+}
+
+<h2>PostTopic</h2>
+
+@using (Html.BeginForm("SubmitPost", "Assignments", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	<div class="form-group">
+		@Html.LabelFor(p => p.Post.Name)
+		@Html.TextBoxFor(p => p.Post.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.Post.Name, "", new { @class = "text-danger" })
+	</div>
+
+	@Html.HiddenFor(p => p.Post.AssignmentId)
+
+
+	<div class="form-group">
+		@Html.LabelFor(model => model.Post.File, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			<input type="file" name="File" id="File" style="width: 100%;" />
+		</div>
+	</div>
+
+	<div type="submit">
+		<button class="btn btn-primary" onclick="SendEmail()">Submit</button>
+	</div>
+
+	<script>
+			var SendEmail = function () {
+				$.ajax({
+					type: "Post",
+					url: "/Posts/SendEmailToUser",
+
+				})
+			}
+	</script>
+}

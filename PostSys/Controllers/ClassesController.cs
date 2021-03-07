@@ -81,7 +81,9 @@ namespace PostSys.Controllers
 		public ActionResult MyClass()
 		{
 			var getcurrentCoordinatorId = User.Identity.GetUserId();
-			var getMyCourse = _context.Classes.Where(c => c.CoordinatorId == getcurrentCoordinatorId).Include(c => c.Coordinator).Include(f => f.Faculty);
+			var getMyCourse = _context.Classes.Where(c => c.CoordinatorId == getcurrentCoordinatorId)
+											  .Include(c => c.Coordinator)
+											  .Include(f => f.Faculty);
 
 			return View(getMyCourse);
 		}
