@@ -12,7 +12,6 @@
 			<th>Course Name</th>
 			<th>Class Name</th>
 			<th>Student Name</th>
-			<th>Delete</th>
 		</tr>
 		@foreach (var item in Model)
 		{
@@ -20,7 +19,6 @@
 				<td>@item.Name</td>
 				<td>@item.Class.Name</td>
 				<td>@item.Student.Email</td>
-				<td>@Html.ActionLink("Delete", "DeleteCourse", new { id = item.Id })</td>
 			</tr>
 		}
 	</table>

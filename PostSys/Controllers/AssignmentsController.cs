@@ -28,6 +28,15 @@ namespace PostSys.Controllers
 			return View(getAssignment);
 		}
 
+		public ActionResult DeleteAssignment(int id)
+		{
+			var assignmentInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
+
+			_context.Assignments.Remove(assignmentInDb);
+			_context.SaveChanges();
+
+			return RedirectToAction("ManageMyAssignment");
+		}
 
 		public ActionResult ManageMyAssignment()
 		{

@@ -14,7 +14,6 @@
 			<th>Deadline StartDate</th>
 			<th>Deadline EndDate</th>
 			<th>Course Name</th>
-			<th>Delete</th>
 		</tr>
 		@foreach (var item in Model)
 		{
@@ -23,8 +22,6 @@
 				<td>@item.Deadline.StartDate</td>
 				<td>@item.Deadline.EndDate</td>
 				<td>@item.Course.Name</td>
-				<td>@Html.ActionLink("Delete", "DeleteAssignment", new { id = item.Id })</td>
-
 			</tr>
 		}
 	</table>

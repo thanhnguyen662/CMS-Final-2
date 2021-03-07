@@ -18,10 +18,16 @@
 		<button class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Faculty Function<span class="caret"></span></a>
 			<ul class="dropdown-menu" role="menu">
-				<li>@Html.ActionLink("List Faculty", "ListFaculties", "Faculties")</li>
 				<li>@Html.ActionLink("Create Faculty", "CreateFaculty", "Faculties")</li>
-				<li>@Html.ActionLink("List Class", "ListClasses", "Classes")</li>
 				<li>@Html.ActionLink("Create Class", "CreateClass", "Classes")</li>
+				<li>@Html.ActionLink("List Faculty", "ListFaculties", "Faculties")</li>
+				<li>@Html.ActionLink("List Class", "ListClasses", "Classes")</li>
+				<li>@Html.ActionLink("List Course", "ListCourses", "Courses")</li>
+				<li>@Html.ActionLink("List Assignment", "ListAssignment", "Assignments")</li>
+				<li>@Html.ActionLink("List Posts", "ListPost", "Posts")</li>
+				<li>@Html.ActionLink("List Comment", "ListComment", "Posts")</li>
+				<li>@Html.ActionLink("List Publication", "ListPublication", "Posts")</li>
+				<li>@Html.ActionLink("List Deadline", "ListDeadline", "Deadlines")</li>
 			</ul>
 		</button>
 	</div>
@@ -38,13 +44,15 @@
 		<button class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Coordinator Function<span class="caret"></span></a>
 			<ul class="dropdown-menu" role="menu">
+				<li>@Html.ActionLink("Manage My Class", "MyClass", "Classes")</li>
+				<li>@Html.ActionLink("Manage My Course", "ManageMyCourse", "Courses")</li>
+				<li>@Html.ActionLink("Manage My Assignment", "ManageMyCourse", "Courses")</li>
+				<li>@Html.ActionLink("Manage My Post", "ManageMyPost", "Posts")</li>
+				<li>@Html.ActionLink("Manage My Publication", "ManageMinePublication", "Posts")</li>
+				<li>@Html.ActionLink("Manage My Comment", "ManageMyComment", "Posts")</li>
 
-
-				<li>@Html.ActionLink("Mine Class", "Mine", "Classes")</li>
-				<li>@Html.ActionLink("Assign Student to Course", "AssignStudentToCourse", "Courses")</li>
-				<li>@Html.ActionLink("Manage Post", "ManageMinePost", "Posts")</li>
-				<li>@Html.ActionLink("Manage Mine Course", "ManageMineCourse", "Courses")</li>
-				<li>@Html.ActionLink("Mine Publication", "ManageMinePublication", "Posts")</li>
+				<li>@Html.ActionLink("CreateDeadline", "CreateDeadline", "Deadlines")</li>
+				<li>@Html.ActionLink("ManageMyDeadline", "ManageMyDeadline", "Deadlines")</li>
 			</ul>
 		</button>
 	</div>
@@ -62,8 +70,8 @@
 		<button class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Manager Function<span class="caret"></span></a>
 			<ul class="dropdown-menu" role="menu">
-				<li>@Html.ActionLink("Mine Course", "MineCourse", "Courses")</li>
-				<li>@Html.ActionLink("Mine Topic", "MinePost", "Posts")</li>
+				<li>@Html.ActionLink("ManageMyAssignment", "ManageMyAssignment", "Assignments")</li>
+				<li>@Html.ActionLink("ManageMyCourse", "ManageMyCourse", "Courses")</li>
 			</ul>
 		</button>
 	</div>

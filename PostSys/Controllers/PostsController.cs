@@ -40,7 +40,7 @@ namespace PostSys.Controllers
 			_context.Posts.Remove(postInDb);
 			_context.SaveChanges();
 
-			return RedirectToAction("ListPost");
+			return RedirectToAction("ManageMyPost");
 		}
 
 		public ActionResult ManageMyPost()

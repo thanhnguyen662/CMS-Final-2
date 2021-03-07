@@ -228,6 +228,14 @@
     <Compile Include="Migrations\202103071056109_AddDeadlineTable1.Designer.cs">
       <DependentUpon>202103071056109_AddDeadlineTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103071115126_AddDeadlineTable2.cs" />
+    <Compile Include="Migrations\202103071115126_AddDeadlineTable2.Designer.cs">
+      <DependentUpon>202103071115126_AddDeadlineTable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103071118494_AddDeadlineTable3.cs" />
+    <Compile Include="Migrations\202103071118494_AddDeadlineTable3.Designer.cs">
+      <DependentUpon>202103071118494_AddDeadlineTable3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -332,6 +340,7 @@
     <Content Include="Views\Posts\ListComment.cshtml" />
     <Content Include="Views\Posts\CreateComment.cshtml" />
     <Content Include="Views\Posts\ManageMyComment.cshtml" />
+    <Content Include="Views\Deadlines\ManageMyDeadline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -387,6 +396,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103071056109_AddDeadlineTable1.resx">
       <DependentUpon>202103071056109_AddDeadlineTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103071115126_AddDeadlineTable2.resx">
+      <DependentUpon>202103071115126_AddDeadlineTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103071118494_AddDeadlineTable3.resx">
+      <DependentUpon>202103071118494_AddDeadlineTable3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

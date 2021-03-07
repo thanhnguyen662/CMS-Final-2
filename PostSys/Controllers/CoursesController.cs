@@ -81,11 +81,6 @@ namespace PostSys.Controllers
 			_context.Courses.Remove(courseInDb);
 			_context.SaveChanges();
 
-			if(User.IsInRole("Marketing Manager"))
-			{
-				return RedirectToAction("ListCourses");
-			}
-
 			if (User.IsInRole("Marketing Coordinator"))
 			{
 				return RedirectToAction("ManageMyCourse");

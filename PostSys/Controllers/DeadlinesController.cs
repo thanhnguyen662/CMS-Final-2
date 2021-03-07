@@ -53,6 +53,16 @@ namespace PostSys.Controllers
             return RedirectToAction("ListDeadline");
         }
 
+        public ActionResult ManageMyDeadline()
+		{
+            var getCurrentCoordinator = User.Identity.GetUserName();
+
+            var getMyDeadline = _context.Deadlines.Where(u => u.CreateBy == getCurrentCoordinator)
+                                                  .ToList();
+
+            return View(getMyDeadline);
+		}
+
         public ActionResult DeleteDeadline(int id)
 		{
             var deadlineInDb = _context.Deadlines.SingleOrDefault(i => i.Id == id);
@@ -60,14 +70,9 @@ namespace PostSys.Controllers
             _context.Deadlines.Remove(deadlineInDb);
             _context.SaveChanges();
 
-            if (User.IsInRole("Marketing Manager"))
-            {
-                return RedirectToAction("ListDeadline");
-            }
-
             if (User.IsInRole("Marketing Coordinator"))
             {
-                return RedirectToAction("ListDeadline");
+                return RedirectToAction("ManageMyDeadline");
             }
 
             return View();
