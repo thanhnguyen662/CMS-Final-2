@@ -224,6 +224,10 @@
     <Compile Include="Migrations\202103071011591_AddCommentTable.Designer.cs">
       <DependentUpon>202103071011591_AddCommentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103071056109_AddDeadlineTable1.cs" />
+    <Compile Include="Migrations\202103071056109_AddDeadlineTable1.Designer.cs">
+      <DependentUpon>202103071056109_AddDeadlineTable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -380,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103071011591_AddCommentTable.resx">
       <DependentUpon>202103071011591_AddCommentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103071056109_AddDeadlineTable1.resx">
+      <DependentUpon>202103071056109_AddDeadlineTable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

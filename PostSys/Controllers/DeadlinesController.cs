@@ -1,4 +1,5 @@
-﻿using PostSys.Models;
+﻿using Microsoft.AspNet.Identity;
+using PostSys.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace PostSys.Controllers
         [HttpPost]
         public ActionResult CreateDeadline(Deadline deadline)
         {
+            var getUserName = User.Identity.GetUserName();
+
             if (deadline.StartDate >= deadline.EndDate)
             {
                 return View("~/Views/ErrorValidations/Null.cshtml");
@@ -39,6 +42,7 @@ namespace PostSys.Controllers
             var createNewDeadline = new Deadline
             {
                 Name = deadline.Name,
+                CreateBy = getUserName,
                 StartDate = deadline.StartDate,
                 EndDate = deadline.EndDate
             };
@@ -63,7 +67,7 @@ namespace PostSys.Controllers
 
             if (User.IsInRole("Marketing Coordinator"))
             {
-                return RedirectToAction("ManageMyCourse");
+                return RedirectToAction("ListDeadline");
             }
 
             return View();

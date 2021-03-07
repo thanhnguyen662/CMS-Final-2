@@ -122,12 +122,14 @@ namespace PostSys.Controllers
 		public ActionResult CreateAssignment(int id)
 		{
 			var getCourseInDb = _context.Courses.SingleOrDefault(c => c.Id == id);
-			var getDeadline = _context.Deadlines.ToList();
+
+			var getCurrentUser = User.Identity.GetUserName();
+			var getMyDeadline = _context.Deadlines.Where(u => u.CreateBy == getCurrentUser).ToList();
 
 			var dropDownListDeadlineCourse = new CourseDeadlineViewModel
 			{
 				Course = getCourseInDb,
-				Deadlines = getDeadline,
+				Deadlines = getMyDeadline,
 			};
 
 			return View(dropDownListDeadlineCourse);

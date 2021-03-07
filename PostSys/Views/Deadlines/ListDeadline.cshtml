@@ -12,6 +12,7 @@
 			<th>Deadline Name</th>
 			<th>StartDate</th>
 			<th>EndDate</th>
+			<th>CreateBy</th>
 			<th>Delete</th>
 		</tr>
 		@foreach (var item in Model)
@@ -20,6 +21,7 @@
 				<td>@item.Name</td>
 				<td>@item.StartDate</td>
 				<td>@item.EndDate</td>
+				<td>@item.CreateBy</td>
 				<td>@Html.ActionLink("Delete", "DeleteDeadline", new { id = item.Id })</td>
 			</tr>
 		}
