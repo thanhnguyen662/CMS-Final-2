@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -294,6 +297,7 @@
     <Compile Include="ViewModels\CommentPostViewModel.cs" />
     <Compile Include="ViewModels\CoordinatorFacultyViewModel.cs" />
     <Compile Include="ViewModels\CourseDeadlineViewModel.cs" />
+    <Compile Include="ViewModels\DownloadZipViewModel.cs" />
     <Compile Include="ViewModels\PostAssignmentViewModel.cs" />
     <Compile Include="ViewModels\StudentClassViewModel.cs" />
     <Compile Include="ViewModels\UserInRolesViewModel.cs" />
@@ -381,6 +385,7 @@
     <Content Include="Views\Posts\CreateComment.cshtml" />
     <Content Include="Views\Posts\ManageMyComment.cshtml" />
     <Content Include="Views\Deadlines\ManageMyDeadline.cshtml" />
+    <Content Include="Views\Posts\DownloadZip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

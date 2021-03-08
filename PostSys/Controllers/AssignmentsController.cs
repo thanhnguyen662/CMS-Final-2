@@ -146,11 +146,11 @@ namespace PostSys.Controllers
 
 				//
 				var userName = User.Identity.GetUserName();
-				string prepend = userName + "_" + assignmentName + "_" + courseName;
+				string prepend = userName + "-" + assignmentName + "-";
 
 				post.File = new byte[file.ContentLength]; // image stored in binary formate
 				file.InputStream.Read(post.File, 0, file.ContentLength);
-				string fileName = prepend + System.IO.Path.GetExtension(file.FileName);
+				string fileName = prepend + System.IO.Path.GetFileName(file.FileName);
 				string urlImage = Server.MapPath("~/Files/" + fileName);
 
 				post.NameOfFile = fileName;

@@ -11,6 +11,8 @@ using System.Text;
 using System.Net;
 using Microsoft.AspNet.Identity;
 using PostSys.ViewModels;
+using System.IO;
+using Ionic.Zip;
 
 namespace PostSys.Controllers
 {
@@ -269,6 +271,124 @@ namespace PostSys.Controllers
 			_context.SaveChanges();
 
 			return RedirectToAction("ManageMyComment");
+		}
+
+		//Download zip 
+		//Coordinator & Marketing Manager
+		[HttpGet]
+		public ActionResult DownloadZip()
+		{
+			//get current user (coor / manager) 
+			var currentUser = User.Identity.GetUserName();
+			string[] filePaths = Directory.GetFiles(Server.MapPath("~/Files/"));
+			List<DownloadZipViewmodel> fileViewmodels = new List<DownloadZipViewmodel>();
+			foreach (string filePath in filePaths)
+			{
+				//Get filename
+				string fileName = Path.GetFileName(filePath);
+				//Split tail
+				string[] splitTail = fileName.Split('.');
+				//get file name without tail 
+				string headfile = splitTail[0];
+				//Get element
+				string[] splitElement = headfile.Split('-');
+				//Get student name 
+				string studentName = splitElement[0];
+				//Get AssignmentName 
+				string assignmentName = splitElement[1];
+				////Get PostName////
+				var postNameList = _context.Posts.Where(m => m.NameOfFile.Contains(fileName)).Select(m => m.Name).ToList();
+				string postName = postNameList[0];
+				///Get Course Name ///
+				var assignmentIdList = _context.Posts.Where(m => m.NameOfFile.Contains(fileName)).Select(m => m.AssignmentId).ToList();
+				int assignmentId = assignmentIdList[0];
+				var courseNameList = (from ass in _context.Assignments
+									  where ass.Id == assignmentId
+									  join co in _context.Courses
+									  on ass.CourseId equals co.Id
+									  select co.Name).ToList();
+				string courseName = courseNameList[0];
+				///Get Coordinator Name 
+				var classIdList = _context.Courses.Where(m => m.Name.Contains(courseName)).Select(m => m.ClassId).ToList();
+				int classId = classIdList[0];
+				var classCoor = (from cl in _context.Classes
+								 where cl.Id == classId
+								 join cor in _context.Users
+								 on cl.CoordinatorId equals cor.Id
+								 select cor.UserName).ToList();
+				string coorName = classCoor[0];
+
+				///Get enddate 
+				var postIdList = _context.Posts.Where(m => m.NameOfFile.Contains(fileName)).Select(m => m.Id).ToList();
+				int postId = postIdList[0];
+				var enddatelist = _context.Posts.Where(m => m.Id == postId)
+								.Include(m => m.Assignment.Deadline)
+								.Select(m => m.Assignment.Deadline.EndDate)
+								.ToList();
+				var enddate = enddatelist[0];
+				//Get faculty name
+				var classfar = (from cl in _context.Classes
+								where cl.Id == classId
+								join fa in _context.Faculties
+								on cl.FacultyId equals fa.Id
+								select fa.Name).ToList();
+				string facultyName = classfar[0];
+				if (User.IsInRole("Marketing Coordinator"))
+				{
+					if (coorName == currentUser)
+					{
+						fileViewmodels.Add(new DownloadZipViewmodel()
+						{
+							FileName = Path.GetFileName(filePath),
+							FilePath = filePath,
+							PostName = postName,
+							AssignmentName = assignmentName,
+							StudentName = studentName,
+						});
+					}
+				}
+				if (User.IsInRole("Marketing Manager"))
+				{
+					if (DateTime.Now > enddate)
+					{
+						fileViewmodels.Add(new DownloadZipViewmodel()
+						{
+							FileName = Path.GetFileName(filePath),
+							FilePath = filePath,
+							PostName = postName,
+							AssignmentName = assignmentName,
+							StudentName = studentName,
+							CourseName = courseName,
+							CoordinatorName = coorName,
+							FacultyName = facultyName
+						});
+					}
+				}
+			}
+			return View(fileViewmodels);
+		}
+
+		[HttpPost]
+		public ActionResult DownloadZip(List<DownloadZipViewmodel> files)
+		{
+			using (ZipFile zip = new ZipFile())
+			{
+				zip.AlternateEncodingUsage = ZipOption.AsNecessary;
+				zip.AddDirectoryByName("Files");
+				foreach (DownloadZipViewmodel file in files)
+				{
+					if (file.IsSelected)
+					{
+						zip.AddFile(file.FilePath, "Files");
+					}
+				}
+				string zipName = String.Format("Zip_{0}.zip", DateTime.Now.ToString("yyyy-MMM-dd-HHmmss"));
+				using (MemoryStream memoryStream = new MemoryStream())
+				{
+					zip.Save(memoryStream);
+					return File(memoryStream.ToArray(), "application/zip", zipName);
+				}
+			}
 		}
 	}
 }
