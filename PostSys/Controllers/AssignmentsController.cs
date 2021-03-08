@@ -117,7 +117,6 @@ namespace PostSys.Controllers
 			}
 
 			//
-
 			var newPostAssignmentViewModel = new PostAssignmentViewModel
 			{
 				Assignment = assignemntInDb,
@@ -139,8 +138,8 @@ namespace PostSys.Controllers
 				return View("~/Views/ErrorValidations/Exist.cshtml");
 			}
 
-			if (file != null && file.ContentLength > 0)
-			{
+			if (file != null && file.ContentLength > 0 )
+			{			
 				//
 				//Get Assignment Name
 				var objAssignment = (from ass in _context.Assignments where ass.Id == id select ass.Name).ToList();
@@ -168,7 +167,7 @@ namespace PostSys.Controllers
 				file.SaveAs(urlImage);
 
 				post.UrlFile = "Files/" + fileName;
-			}
+			}			
 
 			var assignemntInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
 
@@ -181,6 +180,11 @@ namespace PostSys.Controllers
 				File = post.File,
 				UrlFile = post.UrlFile
 			};
+
+			if(newPost.NameOfFile == null || newPost.Name == null || newPost.File == null || newPost.UrlFile == null)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
 
 			_context.Posts.Add(newPost);
 			_context.SaveChanges();

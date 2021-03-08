@@ -253,6 +253,10 @@
     <Compile Include="Migrations\202103080709397_AddCourseTable1.Designer.cs">
       <DependentUpon>202103080709397_AddCourseTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103080723398_AddPostTable3.cs" />
+    <Compile Include="Migrations\202103080723398_AddPostTable3.Designer.cs">
+      <DependentUpon>202103080723398_AddPostTable3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202103080801339_AddCourseTable2.cs" />
     <Compile Include="Migrations\202103080801339_AddCourseTable2.Designer.cs">
       <DependentUpon>202103080801339_AddCourseTable2.cs</DependentUpon>
@@ -494,6 +498,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103080709397_AddCourseTable1.resx">
       <DependentUpon>202103080709397_AddCourseTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080723398_AddPostTable3.resx">
+      <DependentUpon>202103080723398_AddPostTable3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103080801339_AddCourseTable2.resx">
       <DependentUpon>202103080801339_AddCourseTable2.cs</DependentUpon>
