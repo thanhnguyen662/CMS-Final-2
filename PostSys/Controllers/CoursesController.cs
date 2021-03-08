@@ -51,20 +51,19 @@ namespace PostSys.Controllers
 		[HttpPost]
 		public ActionResult CreateCourse(Course course)
 		{
-			var getClass = _context.Classes.ToList();
-			var getCurrentUser = User.Identity.GetUserName();
+			var getClass = _context.Classes.Include(f => f.Faculty).ToList();
+			var getCurrentId = User.Identity.GetUserId();
 
-			var getClassIds = _context.Classes.Where(u => u.Coordinator.UserName == getCurrentUser)
-											  .Include(c => c.Coordinator)
-											  .Include(c => c. Faculty)
-											  .Select(u => u.Id)
-											  .ToList();
-			var getClassId = getClassIds[0];	
+			var currentClassList = _context.Classes.Where(m => m.CoordinatorId.Contains(getCurrentId))
+												   .Select(m => m.Id)
+												   .ToList();
+			var classId = currentClassList[0]; 
+
 
 			var newCourse = new Course
 			{
 				Name = course.Name,
-				ClassId = getClassId,
+				ClassId = classId,
 				StudentId = course.StudentId
 			};
 			_context.Courses.Add(newCourse);
@@ -87,19 +86,6 @@ namespace PostSys.Controllers
 			}
 
 			return View();
-		}
-
-		//Student
-		public ActionResult MyCourse()
-		{
-			var getCurrentStudentId = User.Identity.GetUserId();
-
-			var getMyCourse = _context.Courses.Where(s => s.StudentId == getCurrentStudentId)
-											  .Include(c => c.Class)
-											  .Include(s => s.Student)
-											  .ToList();
-
-			return View(getMyCourse);
 		}
 
 		//Coordinator

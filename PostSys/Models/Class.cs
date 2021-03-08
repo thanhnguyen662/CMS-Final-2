@@ -9,6 +9,7 @@ namespace PostSys.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
+		
 
 		public string CoordinatorId { get; set; }
 		public ApplicationUser Coordinator { get; set; }

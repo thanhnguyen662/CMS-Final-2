@@ -236,6 +236,46 @@
     <Compile Include="Migrations\202103071118494_AddDeadlineTable3.Designer.cs">
       <DependentUpon>202103071118494_AddDeadlineTable3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103080653388_AddDeadlineTable4.cs" />
+    <Compile Include="Migrations\202103080653388_AddDeadlineTable4.Designer.cs">
+      <DependentUpon>202103080653388_AddDeadlineTable4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080702438_AddClassTable1.cs" />
+    <Compile Include="Migrations\202103080702438_AddClassTable1.Designer.cs">
+      <DependentUpon>202103080702438_AddClassTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080709397_AddCourseTable1.cs" />
+    <Compile Include="Migrations\202103080709397_AddCourseTable1.Designer.cs">
+      <DependentUpon>202103080709397_AddCourseTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080801339_AddCourseTable2.cs" />
+    <Compile Include="Migrations\202103080801339_AddCourseTable2.Designer.cs">
+      <DependentUpon>202103080801339_AddCourseTable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080809234_AddCourseTable3.cs" />
+    <Compile Include="Migrations\202103080809234_AddCourseTable3.Designer.cs">
+      <DependentUpon>202103080809234_AddCourseTable3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080823007_AddCourseTable4.cs" />
+    <Compile Include="Migrations\202103080823007_AddCourseTable4.Designer.cs">
+      <DependentUpon>202103080823007_AddCourseTable4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080825109_AddClassTable2.cs" />
+    <Compile Include="Migrations\202103080825109_AddClassTable2.Designer.cs">
+      <DependentUpon>202103080825109_AddClassTable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080826367_AddClassTable3.cs" />
+    <Compile Include="Migrations\202103080826367_AddClassTable3.Designer.cs">
+      <DependentUpon>202103080826367_AddClassTable3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080829138_AddClassTable4.cs" />
+    <Compile Include="Migrations\202103080829138_AddClassTable4.Designer.cs">
+      <DependentUpon>202103080829138_AddClassTable4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103080830575_AddCourseTable5.cs" />
+    <Compile Include="Migrations\202103080830575_AddCourseTable5.Designer.cs">
+      <DependentUpon>202103080830575_AddCourseTable5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -322,8 +362,8 @@
     <Content Include="Views\Classes\CreateClass.cshtml" />
     <Content Include="Views\Courses\ListCourses.cshtml" />
     <Content Include="Views\Courses\CreateCourse.cshtml" />
-    <Content Include="Views\Classes\MyClass.cshtml" />
-    <Content Include="Views\Courses\MyCourse.cshtml" />
+    <None Include="Views\Classes\MyClass.cshtml.bak" />
+    <None Include="Views\Courses\MyCourse.cshtml.bak" />
     <Content Include="Views\Courses\ManageMyCourse.cshtml" />
     <Content Include="Views\Deadlines\ListDeadline.cshtml" />
     <Content Include="Views\Deadlines\CreateDeadline.cshtml" />
@@ -402,6 +442,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103071118494_AddDeadlineTable3.resx">
       <DependentUpon>202103071118494_AddDeadlineTable3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080653388_AddDeadlineTable4.resx">
+      <DependentUpon>202103080653388_AddDeadlineTable4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080702438_AddClassTable1.resx">
+      <DependentUpon>202103080702438_AddClassTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080709397_AddCourseTable1.resx">
+      <DependentUpon>202103080709397_AddCourseTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080801339_AddCourseTable2.resx">
+      <DependentUpon>202103080801339_AddCourseTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080809234_AddCourseTable3.resx">
+      <DependentUpon>202103080809234_AddCourseTable3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080823007_AddCourseTable4.resx">
+      <DependentUpon>202103080823007_AddCourseTable4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080825109_AddClassTable2.resx">
+      <DependentUpon>202103080825109_AddClassTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080826367_AddClassTable3.resx">
+      <DependentUpon>202103080826367_AddClassTable3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080829138_AddClassTable4.resx">
+      <DependentUpon>202103080829138_AddClassTable4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103080830575_AddCourseTable5.resx">
+      <DependentUpon>202103080830575_AddCourseTable5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

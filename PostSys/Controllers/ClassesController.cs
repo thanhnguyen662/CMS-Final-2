@@ -77,7 +77,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ListClasses");
 		}
 
-		[HttpGet]
+		/*[HttpGet]
 		public ActionResult MyClass()
 		{
 			var getcurrentCoordinatorId = User.Identity.GetUserId();
@@ -86,6 +86,6 @@ namespace PostSys.Controllers
 											  .Include(f => f.Faculty);
 
 			return View(getMyCourse);
-		}
+		}*/
 	}
 }

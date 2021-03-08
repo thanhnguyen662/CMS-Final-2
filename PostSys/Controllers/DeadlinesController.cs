@@ -8,74 +8,74 @@ using System.Web.Mvc;
 
 namespace PostSys.Controllers
 {
-    public class DeadlinesController : Controller
-    {
-        private ApplicationDbContext _context;
+	public class DeadlinesController : Controller
+	{
+		private ApplicationDbContext _context;
 
 		public DeadlinesController()
 		{
 			_context = new ApplicationDbContext();
 		}
 
-        public ActionResult ListDeadline()
-        {
-            var getAllDeadline = _context.Deadlines.ToList();
-
-            return View(getAllDeadline);
-        }
-
-        public ActionResult CreateDeadline()
+		public ActionResult ListDeadline()
 		{
-            return View();
+			var getAllDeadline = _context.Deadlines.ToList();
+
+			return View(getAllDeadline);
 		}
 
-        [HttpPost]
-        public ActionResult CreateDeadline(Deadline deadline)
-        {
-            var getUserName = User.Identity.GetUserName();
-
-            if (deadline.StartDate >= deadline.EndDate)
-            {
-                return View("~/Views/ErrorValidations/Null.cshtml");
-            }
-
-            var createNewDeadline = new Deadline
-            {
-                Name = deadline.Name,
-                CreateBy = getUserName,
-                StartDate = deadline.StartDate,
-                EndDate = deadline.EndDate
-            };
-
-            _context.Deadlines.Add(createNewDeadline);
-            _context.SaveChanges();
-
-            return RedirectToAction("ListDeadline");
-        }
-
-        public ActionResult ManageMyDeadline()
+		public ActionResult CreateDeadline()
 		{
-            var getCurrentCoordinator = User.Identity.GetUserName();
-
-            var getMyDeadline = _context.Deadlines.Where(u => u.CreateBy == getCurrentCoordinator)
-                                                  .ToList();
-
-            return View(getMyDeadline);
+			return View();
 		}
 
-        public ActionResult DeleteDeadline(int id)
+		[HttpPost]
+		public ActionResult CreateDeadline(Deadline deadline)
 		{
-            var deadlineInDb = _context.Deadlines.SingleOrDefault(i => i.Id == id);
+			var getUserName = User.Identity.GetUserName();
 
-            _context.Deadlines.Remove(deadlineInDb);
-            _context.SaveChanges();
+			if (deadline.StartDate >= deadline.EndDate)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 
-            if (User.IsInRole("Marketing Coordinator"))
-            {
-                return RedirectToAction("ManageMyDeadline");
-            }
 
-            return View();
-        }
-    }
+			var createNewDeadline = new Deadline
+			{
+				CreateBy = getUserName,
+				StartDate = deadline.StartDate,
+				EndDate = deadline.EndDate
+			};
+
+			_context.Deadlines.Add(createNewDeadline);
+			_context.SaveChanges();
+
+			return RedirectToAction("ListDeadline");
+		}
+
+		public ActionResult ManageMyDeadline()
+		{
+			var getCurrentCoordinator = User.Identity.GetUserName();
+
+			var getMyDeadline = _context.Deadlines.Where(u => u.CreateBy == getCurrentCoordinator)
+												  .ToList();
+
+			return View(getMyDeadline);
+		}
+
+		public ActionResult DeleteDeadline(int id)
+		{
+			var deadlineInDb = _context.Deadlines.SingleOrDefault(i => i.Id == id);
+
+			_context.Deadlines.Remove(deadlineInDb);
+			_context.SaveChanges();
+
+			if (User.IsInRole("Marketing Coordinator"))
+			{
+				return RedirectToAction("ManageMyDeadline");
+			}
+
+			return View();
+		}
+	}
 }

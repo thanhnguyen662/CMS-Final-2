@@ -20,7 +20,8 @@
 			<ul class="dropdown-menu" role="menu">
 				<li>@Html.ActionLink("Create Faculty", "CreateFaculty", "Faculties")</li>
 				<li>@Html.ActionLink("Create Class", "CreateClass", "Classes")</li>
-				<li>@Html.ActionLink("List Faculty", "ListFaculties", "Faculties")</li>
+
+				<li>@Html.ActionLink("List Faculty", "ListFaculty", "Faculties")</li>
 				<li>@Html.ActionLink("List Class", "ListClasses", "Classes")</li>
 				<li>@Html.ActionLink("List Course", "ListCourses", "Courses")</li>
 				<li>@Html.ActionLink("List Assignment", "ListAssignment", "Assignments")</li>
@@ -44,14 +45,17 @@
 		<button class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Coordinator Function<span class="caret"></span></a>
 			<ul class="dropdown-menu" role="menu">
-				<li>@Html.ActionLink("Manage My Class", "MyClass", "Classes")</li>
+				<li>@Html.ActionLink("CreateCourse", "CreateCourse", "Courses")</li>
+				<li>@Html.ActionLink("CreateDeadline", "CreateDeadline", "Deadlines")</li>
+
 				<li>@Html.ActionLink("Manage My Course", "ManageMyCourse", "Courses")</li>
 				<li>@Html.ActionLink("Manage My Assignment", "ManageMyCourse", "Courses")</li>
 				<li>@Html.ActionLink("Manage My Post", "ManageMyPost", "Posts")</li>
+
 				<li>@Html.ActionLink("Manage My Publication", "ManageMinePublication", "Posts")</li>
 				<li>@Html.ActionLink("Manage My Comment", "ManageMyComment", "Posts")</li>
 
-				<li>@Html.ActionLink("CreateDeadline", "CreateDeadline", "Deadlines")</li>
+
 				<li>@Html.ActionLink("ManageMyDeadline", "ManageMyDeadline", "Deadlines")</li>
 			</ul>
 		</button>
