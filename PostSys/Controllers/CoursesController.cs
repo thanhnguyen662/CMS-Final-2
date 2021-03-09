@@ -89,19 +89,30 @@ namespace PostSys.Controllers
 			return View();
 		}
 
-		
+
 		[HttpGet]
-		[Authorize(Roles = "Marketing Coordinator")]
+		[Authorize(Roles = "Marketing Coordinator, Student")]
 		//Coordinator
 		public ActionResult ManageMyCourse()
 		{
 			var getCurrentCoordinatorUserName = User.Identity.GetUserName();
 			var getUser = _context.Users.ToList();
-		
-			var getCourseOfCoordinator = _context.Courses.Where(c => c.Class.Coordinator.UserName == getCurrentCoordinatorUserName).Include(c => c.Class).ToList();
 
-			return View(getCourseOfCoordinator);
-			
+			if (User.IsInRole("Marketing Coordinator"))
+			{
+				var getCourseOfCoordinator = _context.Courses.Where(c => c.Class.Coordinator.UserName == getCurrentCoordinatorUserName).Include(c => c.Class).ToList();
+
+				return View(getCourseOfCoordinator);
+			}
+
+			if (User.IsInRole("Student"))
+			{
+				var getCourseOfCoordinator = _context.Courses.Where(c => c.Student.UserName == getCurrentCoordinatorUserName).Include(c => c.Class).ToList();
+
+				return View(getCourseOfCoordinator);
+			}
+
+			return View();
 		}
 
 
