@@ -20,7 +20,7 @@ namespace PostSys.Controllers
 		}
 
 		// GET: Classes
-		[Authorize(Roles = "Marketing Manager")]
+		[Authorize(Roles = "Marketing Manager, Student")]
 		public ActionResult ListClasses()
 		{
 			var getFaculies = _context.Faculties.ToList();
@@ -83,13 +83,13 @@ namespace PostSys.Controllers
 		}
 
 
-		[Authorize(Roles = "Marketing Manager")]
+		[Authorize(Roles = "Student")]
 		public ActionResult AssignClass()
 		{
 			return View();
 		}
 
-		[Authorize(Roles = "Marketing Manager")]
+		[Authorize(Roles = "Student")]
 		[HttpPost]
 		public ActionResult AssignClass(Course course, int id)
 		{

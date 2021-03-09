@@ -21,6 +21,7 @@ namespace PostSys.Controllers
 		}
 
 		//Manager
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListAssignment()
 		{
 			var getAssignment = _context.Assignments.Include(c => c.Course).Include(d => d.Deadline).ToList();
@@ -28,6 +29,7 @@ namespace PostSys.Controllers
 			return View(getAssignment);
 		}
 
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult DeleteAssignment(int id)
 		{
 			var assignmentInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
@@ -38,6 +40,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ManageMyAssignment");
 		}
 
+		[Authorize(Roles = "Marketing Coordinator, Student")]
 		public ActionResult ManageMyAssignment()
 		{
 			var getUserName = User.Identity.GetUserName();
@@ -86,6 +89,7 @@ namespace PostSys.Controllers
 			}
 		}
 
+		[Authorize(Roles = "Student")]
 		[HttpGet]
 		public ActionResult SubmitPost(int id)
 		{
@@ -118,7 +122,7 @@ namespace PostSys.Controllers
 			return View(newPostAssignmentViewModel);
 		}
 
-		
+		[Authorize(Roles = "Student")]
 		[HttpPost]
 		public ActionResult SubmitPost([Bind(Include = "Name, Status, File, UrlFile, PostDate, NameOfFile")] HttpPostedFileBase file, Post post, Assignment assignment, int id)
 		{

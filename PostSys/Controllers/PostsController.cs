@@ -25,6 +25,7 @@ namespace PostSys.Controllers
 			_context = new ApplicationDbContext();
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		//manager
 		public ActionResult ListPost()
 		{
@@ -35,6 +36,7 @@ namespace PostSys.Controllers
 			return View(getPost);
 		}
 
+		[Authorize(Roles = "Marketing Coordinator, Student")]
 		public ActionResult DeletePost(int id)
 		{
 			var postInDb = _context.Posts.SingleOrDefault(i => i.Id == id);
@@ -45,6 +47,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ManageMyPost");
 		}
 
+		[Authorize(Roles = "Marketing Coordinator, Student")]
 		public ActionResult ManageMyPost()
 		{
 			var getDeadline = _context.Deadlines.ToList();
@@ -72,6 +75,7 @@ namespace PostSys.Controllers
 			return View();
 		}
 
+		[Authorize(Roles = "Student")]
 		public FileResult DownloadFile(Post post)
 		{
 
@@ -139,6 +143,7 @@ namespace PostSys.Controllers
 			return Json(result, JsonRequestBehavior.AllowGet);
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListPublication()
 		{
 			var getAssignmentCourse = _context.Assignments.Include(c => c.Course).ToList();
@@ -149,6 +154,7 @@ namespace PostSys.Controllers
 			return View(getPublication);
 		}
 
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult CreatePublication(int id)
 		{
 			var getPostId = _context.Posts.SingleOrDefault(i => i.Id == id);
@@ -163,6 +169,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ManageMyPost");
 		}
 
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult DeletePublication(int id)
 		{
 			var publicationInDb = _context.Publications.SingleOrDefault(i => i.Id == id);
@@ -173,6 +180,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ManageMyPublication");
 		}
 
+		[Authorize(Roles = "Marketing Coordinator, Student")]
 		public ActionResult ManageMyPublication()
 		{
 			var getCurrentUserName = User.Identity.GetUserName();
@@ -199,6 +207,7 @@ namespace PostSys.Controllers
 			return View();
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListComment()
 		{
 			var getComment = _context.Comments.Include(p => p.Post).ToList();
@@ -211,12 +220,15 @@ namespace PostSys.Controllers
 			return View(getComment);
 		}
 
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult CreateComment()
 		{
 
 			return View();
 		}
 
+
+		[Authorize(Roles = "Marketing Coordinator")]
 		[HttpPost]
 		public ActionResult CreateComment(Comment comment, int id)
 		{
@@ -231,9 +243,10 @@ namespace PostSys.Controllers
 			_context.Comments.Add(newComment);
 			_context.SaveChanges();
 
-			return RedirectToAction("ListComment");
+			return RedirectToAction("ManageMyComment");
 		}
 
+		[Authorize(Roles = "Marketing Coordinator, Student")]
 		public ActionResult ManageMyComment()
 		{
 			var getCurrentUserName = User.Identity.GetUserName();
@@ -263,6 +276,8 @@ namespace PostSys.Controllers
 
 			return View();
 		}
+
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult DeleteComment(int id)
 		{
 			var commentInDb = _context.Comments.SingleOrDefault(i => i.Id == id);
@@ -275,6 +290,7 @@ namespace PostSys.Controllers
 
 		//Download zip 
 		//Coordinator & Marketing Manager
+		[Authorize(Roles = "Marketing Coordinator, Marketing Manager")]
 		[HttpGet]
 		public ActionResult DownloadZip()
 		{
@@ -370,6 +386,7 @@ namespace PostSys.Controllers
 			return View(fileViewmodels);
 		}
 
+		[Authorize(Roles = "Marketing Coordinator, Marketing Manager")]
 		[HttpPost]
 		public ActionResult DownloadZip(List<DownloadZipViewmodel> files)
 		{

@@ -8,8 +8,8 @@
 	<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-@*@if (Request.IsAuthenticated && User.IsInRole("Marketing Manager"))
-{*@
+@if (Request.IsAuthenticated && User.IsInRole("Marketing Manager"))
+{
 	<div class="col-md-4">
 		<h2>Manager</h2>
 		<p>
@@ -35,11 +35,11 @@
 			</ul>
 		</button>
 	</div>
-@*}*@
+}
 
 
-@*@if (Request.IsAuthenticated && User.IsInRole("Marketing Coodinator"))
-{*@
+@if (Request.IsAuthenticated && User.IsInRole("Marketing Coordinator"))
+{
 	<div class="col-md-4">
 		<h2>Coordinator function</h2>
 		<p>
@@ -54,8 +54,8 @@
 
 				<li>@Html.ActionLink("Manage My Course", "ManageMyCourse", "Courses")</li>
 
-				<li>@Html.ActionLink("Create Assignment", "ManageMyCourse", "Courses")</li>
-				<li>@Html.ActionLink("Manage My Assignment", "ManageMyCourse", "Courses")</li>
+				<li>@Html.ActionLink("Create Assignment", "ManageMyDeadline", "Deadlines")</li>
+				<li>@Html.ActionLink("Manage My Assignment", "ManageMyAssignment", "Assignments")</li>
 
 				<li>@Html.ActionLink("Manage My Post", "ManageMyPost", "Posts")</li>
 
@@ -68,12 +68,12 @@
 			</ul>
 		</button>
 	</div>
-@*}*@
+}
 
 
 
-@*@if (Request.IsAuthenticated && User.IsInRole("Student"))
-{*@
+@if (Request.IsAuthenticated && User.IsInRole("Student"))
+{
 	<div class="col-md-4">
 		<h2>Student function</h2>
 		<p>
@@ -82,12 +82,13 @@
 		<button class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Manager Function<span class="caret"></span></a>
 			<ul class="dropdown-menu" role="menu">
-				<li>@Html.ActionLink("Assign Class", "ListClasses", "Classes")</li>
+				<li>@Html.ActionLink("Assign Course", "ListClasses", "Classes")</li>
+				<li>@Html.ActionLink("Manage My Course", "ManageMyCourse", "Courses")</li>
 				<li>@Html.ActionLink("Manage My Assignment", "ManageMyAssignment", "Assignments")</li>
-				
+
 				<li>@Html.ActionLink("Submit Post", "ManageMyAssignment", "Assignments")</li>
 				<li>@Html.ActionLink("Manage My Post", "ManageMyPost", "Posts")</li>
 			</ul>
 		</button>
 	</div>
-@*}*@
+}

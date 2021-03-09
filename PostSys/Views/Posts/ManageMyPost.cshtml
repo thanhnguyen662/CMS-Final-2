@@ -21,6 +21,12 @@
 				<th>Download File</th>
 			}
 
+			@if (User.IsInRole("Marketing Coordinator"))
+			{
+				<th>AddPublication</th>
+				<th>AddComment</th>
+			}
+
 		</tr>
 		@foreach (var item in Model)
 		{

@@ -19,6 +19,7 @@ namespace PostSys.Controllers
 			_context = new ApplicationDbContext();
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListDeadline()
 		{
 			var getAllDeadline = _context.Deadlines.ToList();
@@ -26,11 +27,13 @@ namespace PostSys.Controllers
 			return View(getAllDeadline);
 		}
 
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult CreateDeadline()
 		{
 			return View();
 		}
 
+		[Authorize(Roles = "Marketing Coordinator")]
 		[HttpPost]
 		public ActionResult CreateDeadline(Deadline deadline)
 		{
@@ -52,9 +55,10 @@ namespace PostSys.Controllers
 			_context.Deadlines.Add(createNewDeadline);
 			_context.SaveChanges();
 
-			return RedirectToAction("ListDeadline");
+			return RedirectToAction("ManageMyDeadline");
 		}
 
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult ManageMyDeadline()
 		{
 			var getCurrentCoordinator = User.Identity.GetUserName();
@@ -64,6 +68,8 @@ namespace PostSys.Controllers
 
 			return View(getMyDeadline);
 		}
+
+		[Authorize(Roles = "Marketing Coordinator")]
 
 		public ActionResult DeleteDeadline(int id)
 		{
@@ -80,7 +86,7 @@ namespace PostSys.Controllers
 			return View();
 		}
 
-
+		[Authorize(Roles = "Marketing Coordinator")]
 		[HttpGet]
 		public ActionResult AddAssignment()
 		{
@@ -115,6 +121,8 @@ namespace PostSys.Controllers
 			}
 			return View(addAsignment);
 		}
+
+		[Authorize(Roles = "Marketing Coordinator")]
 		[HttpPost]
 		public ActionResult AddAssignment(List<AddAssignmentViewModel> addAsignment, int id)
 		{

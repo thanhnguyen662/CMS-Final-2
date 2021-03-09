@@ -19,7 +19,7 @@ namespace PostSys.Controllers
 			_context = new ApplicationDbContext();
 		}
 		// GET: Courses
-
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListCourses()
 		{
 			var getClass = _context.Classes.Include(c => c.Coordinator).ToList();
@@ -73,7 +73,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ListCourses");
 		}*/
 
-
+		[Authorize(Roles = "Marketing Coordinator")]
 		public ActionResult DeleteCourse(int id)
 		{
 			var courseInDb = _context.Courses.SingleOrDefault(i => i.Id == id);
@@ -89,16 +89,21 @@ namespace PostSys.Controllers
 			return View();
 		}
 
+		
+		[HttpGet]
+		[Authorize(Roles = "Marketing Coordinator")]
 		//Coordinator
 		public ActionResult ManageMyCourse()
 		{
 			var getCurrentCoordinatorUserName = User.Identity.GetUserName();
 			var getUser = _context.Users.ToList();
-
+		
 			var getCourseOfCoordinator = _context.Courses.Where(c => c.Class.Coordinator.UserName == getCurrentCoordinatorUserName).Include(c => c.Class).ToList();
 
 			return View(getCourseOfCoordinator);
+			
 		}
+
 
 		/*//Coordinator
 		public ActionResult CreateAssignment(int id)
