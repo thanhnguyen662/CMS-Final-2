@@ -339,7 +339,8 @@ namespace PostSys.Controllers
 					{
 						fileViewmodels.Add(new DownloadZipViewmodel()
 						{
-							FileName = Path.GetFileName(filePath),
+							/*FileName = Path.GetFileName(filePath),*/
+							FileName = Path.GetExtension(filePath),
 							FilePath = filePath,
 							PostName = postName,
 							AssignmentName = assignmentName,
@@ -353,7 +354,8 @@ namespace PostSys.Controllers
 					{
 						fileViewmodels.Add(new DownloadZipViewmodel()
 						{
-							FileName = Path.GetFileName(filePath),
+							/*FileName = Path.GetFileName(filePath),*/
+							FileName = Path.GetExtension(filePath),
 							FilePath = filePath,
 							PostName = postName,
 							AssignmentName = assignmentName,
