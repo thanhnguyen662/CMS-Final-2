@@ -57,7 +57,8 @@ namespace PostSys.Controllers
 			{
 				Name = @class.Name,
 				FacultyId = @class.FacultyId,
-				CoordinatorId = @class.CoordinatorId
+				CoordinatorId = @class.CoordinatorId,
+				EnrollmentKey = @class.EnrollmentKey
 			};
 
 			_context.Classes.Add(newClass);
@@ -77,15 +78,48 @@ namespace PostSys.Controllers
 			return RedirectToAction("ListClasses");
 		}
 
-		/*[HttpGet]
-		public ActionResult MyClass()
+		public ActionResult AssignClass()
 		{
-			var getcurrentCoordinatorId = User.Identity.GetUserId();
-			var getMyCourse = _context.Classes.Where(c => c.CoordinatorId == getcurrentCoordinatorId)
-											  .Include(c => c.Coordinator)
-											  .Include(f => f.Faculty);
+			return View();
+		}
 
-			return View(getMyCourse);
-		}*/
+
+		[HttpPost]
+		public ActionResult AssignClass(Course course, int id)
+		{
+			var classId = _context.Classes.SingleOrDefault(i => i.Id == id);
+			var currentStudent = User.Identity.GetUserId();
+
+			//get EnrollmentKey from ClassId
+			var classIds = _context.Classes.Where(m => m.Id == id).Select(m => m.EnrollmentKey).ToList();
+			var enrollKey = classIds[0];
+			var enrollKeyLength = enrollKey.Length;
+
+			//get FacultyName from ClassId
+			var facultyNames = _context.Classes.Where(m => m.Id == id)
+											   .Include(f => f.Faculty)
+											   .Select(m => m.Faculty.Name)
+											   .ToList();
+			var facultyName = facultyNames[0];									   
+
+
+			var newAssign = new Course
+			{
+				Name = facultyName + "_" + "Course",
+				ClassId = classId.Id,
+				StudentId = currentStudent,
+				EnrollmentKey = course.EnrollmentKey
+			};
+
+			if (newAssign.EnrollmentKey.Contains(enrollKey) && newAssign.EnrollmentKey.Length == enrollKeyLength)
+			{
+				_context.Courses.Add(newAssign);
+				_context.SaveChanges();
+
+				return RedirectToAction("ListClasses");
+			}
+
+			return View("~/Views/ErrorValidations/Null.cshtml");
+		}
 	}
 }

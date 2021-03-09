@@ -11,14 +11,30 @@
 		<tr>
 			<th>Name</th>
 			<th>Coordinator Name</th>
-			<th>Delete</th>
+			@if (User.IsInRole("Marketing Manager"))
+			{
+				<th>Delete</th>
+			}
+			@if (User.IsInRole("Student"))
+			{
+				<th>Assign to Course</th>
+			}
+
 		</tr>
 		@foreach (var item in Model)
 		{
 			<tr>
 				<td>@item.Name</td>
 				<td>@item.Faculty.Name</td>
-				<td>@Html.ActionLink("Delete", "DeleteClass", new { id = item.Id })</td>
+				@if (User.IsInRole("Marketing Manager"))
+				{
+					<td>@Html.ActionLink("Delete", "DeleteClass", new { id = item.Id })</td>
+				}
+				@if (User.IsInRole("Student"))
+				{
+					<td>@Html.ActionLink("Assign", "AssignClass", new { id = item.Id })</td>
+				}
+				
 			</tr>
 		}
 	</table>

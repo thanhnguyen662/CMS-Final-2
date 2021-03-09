@@ -29,7 +29,7 @@ namespace PostSys.Controllers
 			return View(getCourse);
 		}
 
-		public ActionResult CreateCourse()
+		/*public ActionResult CreateCourse()
 		{
 			var listClass = _context.Classes.Include(c => c.Coordinator).ToList();
 
@@ -70,7 +70,7 @@ namespace PostSys.Controllers
 			_context.SaveChanges();
 
 			return RedirectToAction("ListCourses");
-		}
+		}*/
 
 
 		public ActionResult DeleteCourse(int id)

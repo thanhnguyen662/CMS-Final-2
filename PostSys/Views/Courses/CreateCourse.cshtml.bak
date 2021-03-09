@@ -1,0 +1,27 @@
+﻿@model PostSys.ViewModels.StudentClassViewModel
+@{
+	ViewBag.Title = "CreateCourse";
+}
+
+<h2>CreateCourse</h2>
+
+@using (Html.BeginForm("CreateCourse", "Courses", FormMethod.Post))
+{
+	@Html.HiddenFor(m => m.Course.Id)
+
+	<div class="form-group">
+		@Html.LabelFor(p => p.Course.Name)
+		@Html.TextBoxFor(p => p.Course.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.Course.Name, "", new { @class = "text-danger" })
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(m => m.Course.StudentId)
+		@Html.DropDownListFor(m => m.Course.StudentId,
+			new SelectList(Model.Students, "Id", "Email"), "Select Student",
+			new { @class = "form-control" }
+		)
+	</div>
+
+	<button type="submit" class="btn btn-primary">Assign more</button>
+}

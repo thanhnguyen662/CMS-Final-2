@@ -1,0 +1,17 @@
+﻿@model PostSys.Models.Course
+@{
+	ViewBag.Title = "AssignClass";
+}
+
+<h2>AssignClass</h2>
+
+@using (Html.BeginForm("AssignClass", "Classes", FormMethod.Post))
+{
+	<div class="form-group">
+		@Html.LabelFor(p => p.EnrollmentKey)
+		@Html.TextBoxFor(p => p.EnrollmentKey, new { @class = "form-control" })
+		@Html.ValidationMessageFor(p => p.EnrollmentKey, "", new { @class = "text-danger" })
+	</div>
+
+	<button type="submit" class="btn btn-primary">Assign more</button>
+}

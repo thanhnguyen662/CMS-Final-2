@@ -17,5 +17,7 @@ namespace PostSys.Models
 
 		public string StudentId { get; set; }
 		public ApplicationUser Student { get; set; }
+
+		public string EnrollmentKey { get; set; }
 	}
 }

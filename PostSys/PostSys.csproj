@@ -279,6 +279,14 @@
     <Compile Include="Migrations\202103080830575_AddCourseTable5.Designer.cs">
       <DependentUpon>202103080830575_AddCourseTable5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103090107240_AddClassTable5.cs" />
+    <Compile Include="Migrations\202103090107240_AddClassTable5.Designer.cs">
+      <DependentUpon>202103090107240_AddClassTable5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103090309546_AddCourseTable6.cs" />
+    <Compile Include="Migrations\202103090309546_AddCourseTable6.Designer.cs">
+      <DependentUpon>202103090309546_AddCourseTable6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -294,6 +302,7 @@
     <Compile Include="Models\Publication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ClassCourseViewModel.cs" />
     <Compile Include="ViewModels\CommentPostViewModel.cs" />
     <Compile Include="ViewModels\CoordinatorFacultyViewModel.cs" />
     <Compile Include="ViewModels\CourseDeadlineViewModel.cs" />
@@ -365,7 +374,8 @@
     <Content Include="Views\Classes\ListClasses.cshtml" />
     <Content Include="Views\Classes\CreateClass.cshtml" />
     <Content Include="Views\Courses\ListCourses.cshtml" />
-    <Content Include="Views\Courses\CreateCourse.cshtml" />
+    <None Include="Views\Courses\CreateCourse.cshtml.bak" />
+    <None Include="Views\Classes\AssignClass.cshtml" />
     <None Include="Views\Classes\MyClass.cshtml.bak" />
     <None Include="Views\Courses\MyCourse.cshtml.bak" />
     <Content Include="Views\Courses\ManageMyCourse.cshtml" />
@@ -477,6 +487,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103080830575_AddCourseTable5.resx">
       <DependentUpon>202103080830575_AddCourseTable5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103090107240_AddClassTable5.resx">
+      <DependentUpon>202103090107240_AddClassTable5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103090309546_AddCourseTable6.resx">
+      <DependentUpon>202103090309546_AddCourseTable6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
