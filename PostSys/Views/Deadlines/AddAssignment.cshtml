@@ -1,0 +1,32 @@
+﻿@using PostSys.ViewModels
+@model List<AddAssignmentViewModel>
+
+<h2>AddAssignment</h2>
+
+@using (Html.BeginForm("AddAssignment", "Deadlines", FormMethod.Post))
+{
+
+	<table class="table table-hover">
+		<tr>
+			<th></th>
+			<th>Course Name</th>
+			<th>Class Name</th>
+			<th>Student Name</th>
+		</tr>
+		@for (int i = 0; i < Model.Count(); i++)
+		{
+			<tr>
+				<td>@Html.CheckBoxFor(m => m[i].IsSelected)</td>
+				<th>@Model[i].CourseName</th>
+				<th>@Model[i].ClassName</th>
+				<th>@Model[i].StudentName</th>
+				<th>@Model[i].StudentName</th>
+				<td>@Html.HiddenFor(m => m[i].AssignmentName)</td>
+				<td>@Html.HiddenFor(m => m[i].CourseId)</td>
+
+			</tr>
+		}
+	</table>
+	<br />
+	<input type="submit" value="Add" />
+}

@@ -19,6 +19,7 @@ namespace PostSys.Controllers
 			_context = new ApplicationDbContext();
 		}
 		// GET: Courses
+
 		public ActionResult ListCourses()
 		{
 			var getClass = _context.Classes.Include(c => c.Coordinator).ToList();
@@ -99,7 +100,7 @@ namespace PostSys.Controllers
 			return View(getCourseOfCoordinator);
 		}
 
-		//Coordinator
+		/*//Coordinator
 		public ActionResult CreateAssignment(int id)
 		{
 			var getCourseInDb = _context.Courses.SingleOrDefault(c => c.Id == id);
@@ -132,6 +133,6 @@ namespace PostSys.Controllers
 			_context.SaveChanges();
 
 			return RedirectToAction("ManageMyCourse");
-		}
+		}*/
 	}
 }

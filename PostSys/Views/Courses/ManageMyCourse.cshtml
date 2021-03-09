@@ -22,7 +22,7 @@
 				<td>@item.Class.Name</td>
 				<td>@item.Student.Email</td>
 				<td>@Html.ActionLink("Delete", "DeleteCourse", new { id = item.Id })</td>
-				<td>@Html.ActionLink("CreateAssignment", "CreateAssignment", new { id = item.Id })</td>
+				@*<td>@Html.ActionLink("CreateAssignment", "CreateAssignment", new { id = item.Id })</td>*@
 			</tr>
 		}
 	</table>

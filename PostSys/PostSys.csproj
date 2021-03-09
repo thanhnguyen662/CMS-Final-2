@@ -303,6 +303,7 @@
     <Compile Include="Models\Publication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AddAssignmentViewModel.cs" />
     <Compile Include="ViewModels\ClassCourseViewModel.cs" />
     <Compile Include="ViewModels\CommentPostViewModel.cs" />
     <Compile Include="ViewModels\CoordinatorFacultyViewModel.cs" />
@@ -386,7 +387,7 @@
     <Content Include="Views\Courses\ManageMyCourse.cshtml" />
     <Content Include="Views\Deadlines\ListDeadline.cshtml" />
     <Content Include="Views\Deadlines\CreateDeadline.cshtml" />
-    <Content Include="Views\Courses\CreateAssignment.cshtml" />
+    <None Include="Views\Courses\CreateAssignment.cshtml.bak" />
     <Content Include="Views\Assignments\ListAssignment.cshtml" />
     <Content Include="Views\Assignments\ManageMyAssignment.cshtml" />
     <Content Include="Views\Assignments\SubmitPost.cshtml" />
@@ -403,6 +404,7 @@
     <Content Include="Views\Posts\DownloadZip.cshtml" />
     <Content Include="Views\Dashboards\Index.cshtml" />
     <Content Include="Views\Dashboards\PieChart.cshtml" />
+    <Content Include="Views\Deadlines\AddAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

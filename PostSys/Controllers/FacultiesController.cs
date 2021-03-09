@@ -18,6 +18,7 @@ namespace PostSys.Controllers
 
 
 		// GET: Faculties
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListFaculty()
 		{
 			var getAllFaculties = _context.Faculties.ToList();
@@ -25,12 +26,14 @@ namespace PostSys.Controllers
 			return View(getAllFaculties);
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		[HttpGet]
 		public ActionResult CreateFaculty()
 		{
 			return View();
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		[HttpPost]
 		public ActionResult CreateFaculty(Faculty faculty)
 		{
@@ -45,6 +48,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ListFaculty");
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		[HttpGet]
 		public ActionResult DeleteFaculty(int id)
 		{

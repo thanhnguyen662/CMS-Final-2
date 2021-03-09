@@ -20,6 +20,7 @@ namespace PostSys.Controllers
 		}
 
 		// GET: Classes
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListClasses()
 		{
 			var getFaculies = _context.Faculties.ToList();
@@ -30,6 +31,7 @@ namespace PostSys.Controllers
 			return View(getClasses);
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		[HttpGet]
 		public ActionResult CreateClass()
 		{
@@ -50,6 +52,7 @@ namespace PostSys.Controllers
 			return View(dropDownListCoordinatorFaculty);
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		[HttpPost]
 		public ActionResult CreateClass(Class @class)
 		{
@@ -67,6 +70,7 @@ namespace PostSys.Controllers
 			return RedirectToAction("ListClasses");
 		}
 
+		[Authorize(Roles = "Marketing Manager")]
 		[HttpGet]
 		public ActionResult DeleteClass(int id)
 		{
@@ -78,12 +82,14 @@ namespace PostSys.Controllers
 			return RedirectToAction("ListClasses");
 		}
 
+
+		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult AssignClass()
 		{
 			return View();
 		}
 
-
+		[Authorize(Roles = "Marketing Manager")]
 		[HttpPost]
 		public ActionResult AssignClass(Course course, int id)
 		{

@@ -24,6 +24,7 @@
 				<td>@item.EndDate</td>
 				<td>@item.CreateBy</td>
 				<td>@Html.ActionLink("Delete", "DeleteDeadline", new { id = item.Id })</td>
+				<td>@Html.ActionLink("AddAssignment", "AddAssignment", new { id = item.Id })</td>
 			</tr>
 		}
 	</table>
