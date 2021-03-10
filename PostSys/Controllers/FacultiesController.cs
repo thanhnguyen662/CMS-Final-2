@@ -37,10 +37,21 @@ namespace PostSys.Controllers
 		[HttpPost]
 		public ActionResult CreateFaculty(Faculty faculty)
 		{
+			var isExistFaculty = _context.Faculties.Any(c => c.Name == faculty.Name);
+			if(isExistFaculty == true)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
+
 			var newFaculty = new Faculty
 			{
 				Name = faculty.Name
 			};
+
+			if(newFaculty.Name == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 
 			_context.Faculties.Add(newFaculty);
 			_context.SaveChanges();
@@ -53,6 +64,11 @@ namespace PostSys.Controllers
 		public ActionResult DeleteFaculty(int id)
 		{
 			var facultyInDb = _context.Faculties.SingleOrDefault(f => f.Id == id);
+			
+			if(facultyInDb == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 
 			_context.Faculties.Remove(facultyInDb);
 			_context.SaveChanges();

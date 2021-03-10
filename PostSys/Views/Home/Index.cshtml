@@ -22,6 +22,9 @@
 				<li>@Html.ActionLink("Create Class", "CreateClass", "Classes")</li>
 				<li>@Html.ActionLink("Download all as ZIP", "DownloadZip", "Posts")</li>
 
+				<li>@Html.ActionLink("AddGuestToFaculty", "CreateGuest", "GuestZones")</li>
+				<li>@Html.ActionLink("List Guest In Faculty", "ListGuest", "GuestZones")</li>
+
 				<li>@Html.ActionLink("List Faculty", "ListFaculty", "Faculties")</li>
 				<li>@Html.ActionLink("List Class", "ListClasses", "Classes")</li>
 				<li>@Html.ActionLink("List Course", "ListCourses", "Courses")</li>
@@ -52,6 +55,8 @@
 				<li>@Html.ActionLink("CreateDeadline", "CreateDeadline", "Deadlines")</li>
 				<li>@Html.ActionLink("ManageMyDeadline", "ManageMyDeadline", "Deadlines")</li>
 
+				
+
 				<li>@Html.ActionLink("Manage My Course", "ManageMyCourse", "Courses")</li>
 
 				<li>@Html.ActionLink("Create Assignment", "ManageMyDeadline", "Deadlines")</li>
@@ -59,6 +64,7 @@
 
 				<li>@Html.ActionLink("Manage My Post", "ManageMyPost", "Posts")</li>
 
+				<li>@Html.ActionLink("Manage My Class", "ManageMyClass", "Classes")</li>
 
 				<li>@Html.ActionLink("Create Publication/Comment", "ManageMyPost", "Posts")</li>
 				<li>@Html.ActionLink("Manage My Publication", "ManageMyPublication", "Posts")</li>
@@ -80,13 +86,30 @@
 			Chuc nang cua Student
 		</p>
 		<button class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Manager Function<span class="caret"></span></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Student Function<span class="caret"></span></a>
 			<ul class="dropdown-menu" role="menu">
 				<li>@Html.ActionLink("Assign Course", "ListClasses", "Classes")</li>
+				<li>@Html.ActionLink("Manage My Course", "ManageMyCourse", "Courses")</li>
 				<li>@Html.ActionLink("Manage My Assignment", "ManageMyAssignment", "Assignments")</li>
 
 				<li>@Html.ActionLink("Submit Post", "ManageMyAssignment", "Assignments")</li>
 				<li>@Html.ActionLink("Manage My Post", "ManageMyPost", "Posts")</li>
+			</ul>
+		</button>
+	</div>
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Guest"))
+{
+	<div class="col-md-4">
+		<h2>Guest function</h2>
+		<p>
+			Chuc nang cua Guest
+		</p>
+		<button class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Guest Function<span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li>@Html.ActionLink("View Publication In Faculty", "GuestZoneFaculty", "GuestZones")</li>
 			</ul>
 		</button>
 	</div>

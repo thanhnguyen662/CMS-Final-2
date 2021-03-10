@@ -13,6 +13,7 @@
 			<th>Coordinator Name</th>
 			@if (User.IsInRole("Marketing Manager"))
 			{
+				<th>Enrollment Key</th>
 				<th>Delete</th>
 			}
 			@if (User.IsInRole("Student"))
@@ -28,6 +29,7 @@
 				<td>@item.Faculty.Name</td>
 				@if (User.IsInRole("Marketing Manager"))
 				{
+					<td>@item.EnrollmentKey</td>
 					<td>@Html.ActionLink("Delete", "DeleteClass", new { id = item.Id })</td>
 				}
 				@if (User.IsInRole("Student"))

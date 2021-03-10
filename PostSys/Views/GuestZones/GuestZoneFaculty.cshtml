@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PostSys.Models.Publication>
+@{
+	ViewBag.Title = "GuestZoneFaculty";
+}
+
+<h2>GuestZoneFaculty</h2>
+
+@using (Html.BeginForm("GuestZoneFaculty", "GuestZones", FormMethod.Post))
+{
+	<table class="table table-hover">
+		<tr>
+			<th>Post Name</th>
+			<th>Student Name</th>
+			<th>Faculty Name</th>
+			@if (User.IsInRole("Marketing Manager"))
+			{
+				<th>Delete</th>
+			}
+
+
+
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Post.Name</td>
+				<td>@item.Post.Assignment.Course.Student.UserName</td>
+				<td>@item.Post.Assignment.Course.Class.Faculty.Name</td>
+				@if (User.IsInRole("Marketing Manager"))
+				{
+					<td>@Html.ActionLink("Delete", "DeleteGuest", new { id = item.Id })</td>
+				}
+			</tr>
+		}
+	</table>
+}
+
+

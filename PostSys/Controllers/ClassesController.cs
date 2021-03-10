@@ -56,6 +56,14 @@ namespace PostSys.Controllers
 		[HttpPost]
 		public ActionResult CreateClass(Class @class)
 		{
+			var isExistClass = _context.Classes.Any(n => n.Name == @class.Name || 
+													n.CoordinatorId == @class.CoordinatorId || 
+													n.FacultyId == @class.FacultyId);
+			if(isExistClass == true)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
+
 			var newClass = new Class
 			{
 				Name = @class.Name,
@@ -63,6 +71,11 @@ namespace PostSys.Controllers
 				CoordinatorId = @class.CoordinatorId,
 				EnrollmentKey = @class.EnrollmentKey
 			};
+
+			if (newClass.CoordinatorId == null || newClass.EnrollmentKey == null || newClass.Name == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 
 			_context.Classes.Add(newClass);
 			_context.SaveChanges();
@@ -75,6 +88,11 @@ namespace PostSys.Controllers
 		public ActionResult DeleteClass(int id)
 		{
 			var classInDb = _context.Classes.SingleOrDefault(i => i.Id == id);
+
+			if(classInDb == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 
 			_context.Classes.Remove(classInDb);
 			_context.SaveChanges();
@@ -126,6 +144,16 @@ namespace PostSys.Controllers
 			}
 
 			return View("~/Views/ErrorValidations/Null.cshtml");
+		}
+
+		[Authorize(Roles = "Marketing Coordinator")]
+		public ActionResult ManageMyClass()
+		{
+			var getCurrentUser = User.Identity.GetUserName();
+
+			var getMyClass = _context.Classes.Where(c => c.Coordinator.UserName == getCurrentUser).Include(f => f.Faculty).ToList();
+
+			return View(getMyClass);
 		}
 	}
 }

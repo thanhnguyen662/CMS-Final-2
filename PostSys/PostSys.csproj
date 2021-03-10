@@ -178,6 +178,7 @@
     <Compile Include="Controllers\DashboardsController.cs" />
     <Compile Include="Controllers\DeadlinesController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
+    <Compile Include="Controllers\GuestZonesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -288,6 +289,18 @@
     <Compile Include="Migrations\202103090309546_AddCourseTable6.Designer.cs">
       <DependentUpon>202103090309546_AddCourseTable6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103100912597_AddGuestZoneTable.cs" />
+    <Compile Include="Migrations\202103100912597_AddGuestZoneTable.Designer.cs">
+      <DependentUpon>202103100912597_AddGuestZoneTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103100956526_AddGuestZoneTable1.cs" />
+    <Compile Include="Migrations\202103100956526_AddGuestZoneTable1.Designer.cs">
+      <DependentUpon>202103100956526_AddGuestZoneTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103101042050_AddGuestZoneTable2.cs" />
+    <Compile Include="Migrations\202103101042050_AddGuestZoneTable2.Designer.cs">
+      <DependentUpon>202103101042050_AddGuestZoneTable2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -298,6 +311,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Faculty.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\GuestZone.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Publication.cs" />
@@ -309,6 +323,7 @@
     <Compile Include="ViewModels\CoordinatorFacultyViewModel.cs" />
     <Compile Include="ViewModels\CourseDeadlineViewModel.cs" />
     <Compile Include="ViewModels\DownloadZipViewModel.cs" />
+    <Compile Include="ViewModels\GuestFacultyViewModel.cs" />
     <Compile Include="ViewModels\PostAssignmentViewModel.cs" />
     <Compile Include="ViewModels\StudentClassViewModel.cs" />
     <Compile Include="ViewModels\UserInRolesViewModel.cs" />
@@ -380,6 +395,7 @@
     <Content Include="Views\Classes\ListClasses.cshtml" />
     <Content Include="Views\Classes\CreateClass.cshtml" />
     <Content Include="Views\Courses\ListCourses.cshtml" />
+    <Content Include="Views\Classes\ManageMyClass.cshtml" />
     <None Include="Views\Courses\CreateCourse.cshtml.bak" />
     <None Include="Views\Classes\AssignClass.cshtml" />
     <None Include="Views\Classes\MyClass.cshtml.bak" />
@@ -405,6 +421,9 @@
     <Content Include="Views\Dashboards\Index.cshtml" />
     <Content Include="Views\Dashboards\PieChart.cshtml" />
     <Content Include="Views\Deadlines\AddAssignment.cshtml" />
+    <Content Include="Views\GuestZones\ListGuest.cshtml" />
+    <Content Include="Views\GuestZones\CreateGuest.cshtml" />
+    <Content Include="Views\GuestZones\GuestZoneFaculty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -502,6 +521,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103090309546_AddCourseTable6.resx">
       <DependentUpon>202103090309546_AddCourseTable6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103100912597_AddGuestZoneTable.resx">
+      <DependentUpon>202103100912597_AddGuestZoneTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103100956526_AddGuestZoneTable1.resx">
+      <DependentUpon>202103100956526_AddGuestZoneTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103101042050_AddGuestZoneTable2.resx">
+      <DependentUpon>202103101042050_AddGuestZoneTable2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
