@@ -54,6 +54,7 @@ namespace PostSys.Controllers
 
 		[Authorize(Roles = "Marketing Manager")]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult CreateClass(Class @class)
 		{
 			var isExistClass = _context.Classes.Any(n => n.Name == @class.Name || 
@@ -109,6 +110,7 @@ namespace PostSys.Controllers
 
 		[Authorize(Roles = "Student")]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult AssignClass(Course course, int id)
 		{
 			var classId = _context.Classes.SingleOrDefault(i => i.Id == id);

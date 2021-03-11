@@ -7,8 +7,7 @@
 
 @using (Html.BeginForm("AssignClass", "Classes", FormMethod.Post))
 {
-	@Html.HiddenFor(i => i.ClassId);
-	@Html.HiddenFor(i => i.StudentId);
+	@Html.AntiForgeryToken()
 
 	<div class="form-group">
 		@Html.LabelFor(p => p.EnrollmentKey)

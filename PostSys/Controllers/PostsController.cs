@@ -161,8 +161,8 @@ namespace PostSys.Controllers
 
 			//get postid
 			var isExistPostId = _context.Publications.Where(m => m.PostId == id)
-															   .Select(m => m.PostId)
-															   .FirstOrDefault();
+													 .Select(m => m.PostId)
+													 .FirstOrDefault();
 
 			var newPublication = new Publication
 			{
@@ -245,6 +245,7 @@ namespace PostSys.Controllers
 
 		[Authorize(Roles = "Marketing Coordinator")]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult CreateComment(Comment comment, int id)
 		{
 			var postInDb = _context.Posts.SingleOrDefault(i => i.Id == id);
@@ -409,6 +410,7 @@ namespace PostSys.Controllers
 
 		[Authorize(Roles = "Marketing Coordinator, Marketing Manager")]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult DownloadZip(List<DownloadZipViewmodel> files)
 		{
 			using (ZipFile zip = new ZipFile())

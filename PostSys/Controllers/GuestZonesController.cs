@@ -50,6 +50,7 @@ namespace PostSys.Controllers
 
 		[Authorize(Roles = "Marketing Manager")]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult CreateGuest(GuestZone guestZone)
 		{
 			var isExistGuest = _context.GuestZones.Any(n => n.FacultyId == guestZone.FacultyId || 

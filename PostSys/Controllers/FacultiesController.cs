@@ -35,6 +35,7 @@ namespace PostSys.Controllers
 
 		[Authorize(Roles = "Marketing Manager")]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult CreateFaculty(Faculty faculty)
 		{
 			var isExistFaculty = _context.Faculties.Any(c => c.Name == faculty.Name);

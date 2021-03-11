@@ -129,6 +129,7 @@ namespace PostSys.Controllers
 
 		[Authorize(Roles = "Student")]
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult SubmitPost([Bind(Include = "Name, Status, File, UrlFile, PostDate, NameOfFile")] HttpPostedFileBase file, Post post, Assignment assignment, int id)
 		{
 			string extension = Path.GetExtension(file.FileName);

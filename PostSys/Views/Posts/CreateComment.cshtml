@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm("CreateComment", "Posts", FormMethod.Post))
 {
+	@Html.AntiForgeryToken()
 	<div class="form-group">
 		@Html.LabelFor(p => p.Comment.Description)
 		@Html.TextBoxFor(p => p.Comment.Description, new { @class = "form-control" })

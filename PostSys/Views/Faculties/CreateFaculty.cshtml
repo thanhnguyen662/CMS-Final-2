@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm("CreateFaculty", "Faculties", FormMethod.Post))
 {
+	@Html.AntiForgeryToken()
 	<div class="form-group">
 		@Html.LabelFor(p => p.Name)
 		@Html.TextBoxFor(p => p.Name, new { @class = "form-control" })

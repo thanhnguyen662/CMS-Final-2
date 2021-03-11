@@ -8,6 +8,7 @@
 
 @using (Html.BeginForm("CreateGuest", "GuestZones", FormMethod.Post))
 {
+	@Html.AntiForgeryToken()
 	<div class="form-group">
 		@Html.LabelFor(m => m.GuestZone.GuestId)
 		@Html.DropDownListFor(m => m.GuestZone.GuestId,

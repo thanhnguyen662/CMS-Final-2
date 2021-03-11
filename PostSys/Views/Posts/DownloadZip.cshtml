@@ -8,6 +8,7 @@
 
 @using (Html.BeginForm("DownloadZip", "Posts", FormMethod.Post))
 {
+	@Html.AntiForgeryToken()
 	<table class="table table-hover">
 		<tr>
 			<th></th>
