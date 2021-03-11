@@ -7,6 +7,9 @@
 
 @using (Html.BeginForm("AssignClass", "Classes", FormMethod.Post))
 {
+	@Html.HiddenFor(i => i.ClassId);
+	@Html.HiddenFor(i => i.StudentId);
+
 	<div class="form-group">
 		@Html.LabelFor(p => p.EnrollmentKey)
 		@Html.TextBoxFor(p => p.EnrollmentKey, new { @class = "form-control" })

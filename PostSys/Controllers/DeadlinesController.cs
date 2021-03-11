@@ -39,11 +39,16 @@ namespace PostSys.Controllers
 		{
 			var getUserName = User.Identity.GetUserName();
 
-			if (deadline.StartDate >= deadline.EndDate)
+			var isExist = _context.Deadlines.Any(s => s.StartDate == deadline.StartDate && s.EndDate == deadline.EndDate);
+			if(isExist == true)
 			{
 				return View("~/Views/ErrorValidations/Null.cshtml");
 			}
 
+			if (deadline.StartDate >= deadline.EndDate)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 
 			var createNewDeadline = new Deadline
 			{
@@ -51,6 +56,11 @@ namespace PostSys.Controllers
 				StartDate = deadline.StartDate,
 				EndDate = deadline.EndDate
 			};
+
+			if(deadline.StartDate == null || deadline.EndDate == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 
 			_context.Deadlines.Add(createNewDeadline);
 			_context.SaveChanges();
@@ -138,6 +148,7 @@ namespace PostSys.Controllers
 						Name = add.AssignmentName,
 						DeadlineId = getDeadlineId.Id,
 					};
+
 					_context.Assignments.Add(newAssignment);
 					_context.SaveChanges();
 				}

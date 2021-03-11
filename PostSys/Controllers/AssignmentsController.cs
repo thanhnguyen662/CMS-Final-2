@@ -34,6 +34,11 @@ namespace PostSys.Controllers
 		{
 			var assignmentInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
 
+			if(assignmentInDb == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
+
 			_context.Assignments.Remove(assignmentInDb);
 			_context.SaveChanges();
 

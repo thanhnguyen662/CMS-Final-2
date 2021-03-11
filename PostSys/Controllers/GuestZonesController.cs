@@ -43,7 +43,6 @@ namespace PostSys.Controllers
 			{
 				Faculties = listFaculty,
 				Guests = listGuest
-
 			};
 
 			return View(dropDownListFaculty);
@@ -53,12 +52,23 @@ namespace PostSys.Controllers
 		[HttpPost]
 		public ActionResult CreateGuest(GuestZone guestZone)
 		{
+			var isExistGuest = _context.GuestZones.Any(n => n.FacultyId == guestZone.FacultyId || 
+													   n.GuestId == guestZone.GuestId);
+			if(isExistGuest == true)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
+
 			var newGuest = new GuestZone
 			{
 				FacultyId = guestZone.FacultyId,
-				GuestId = guestZone.GuestId
-				
+				GuestId = guestZone.GuestId			
 			};
+
+			if(newGuest.GuestId == null || newGuest.Name == null)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
 
 			_context.GuestZones.Add(newGuest);
 			_context.SaveChanges();

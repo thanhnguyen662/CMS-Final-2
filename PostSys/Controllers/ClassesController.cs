@@ -115,7 +115,9 @@ namespace PostSys.Controllers
 			var currentStudent = User.Identity.GetUserId();
 
 			//get EnrollmentKey from ClassId
-			var classIds = _context.Classes.Where(m => m.Id == id).Select(m => m.EnrollmentKey).ToList();
+			var classIds = _context.Classes.Where(m => m.Id == id)
+				                           .Select(m => m.EnrollmentKey)
+										   .ToList();
 			var enrollKey = classIds[0];
 			var enrollKeyLength = enrollKey.Length;
 
@@ -124,8 +126,11 @@ namespace PostSys.Controllers
 											   .Include(f => f.Faculty)
 											   .Select(m => m.Faculty.Name)
 											   .ToList();
-			var facultyName = facultyNames[0];									   
+			var facultyName = facultyNames[0];
 
+			var checkIsExist = _context.Courses.Where(m => m.StudentId == currentStudent)
+				                        .Select(m => m.StudentId)
+										.FirstOrDefault();
 
 			var newAssign = new Course
 			{
@@ -134,6 +139,16 @@ namespace PostSys.Controllers
 				StudentId = currentStudent,
 				EnrollmentKey = course.EnrollmentKey
 			};
+
+			if(newAssign.EnrollmentKey == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
+			
+			if(newAssign.StudentId == checkIsExist)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
 
 			if (newAssign.EnrollmentKey.Contains(enrollKey) && newAssign.EnrollmentKey.Length == enrollKeyLength)
 			{

@@ -159,10 +159,20 @@ namespace PostSys.Controllers
 		{
 			var getPostId = _context.Posts.SingleOrDefault(i => i.Id == id);
 
+			//get postid
+			var isExistPostId = _context.Publications.Where(m => m.PostId == id)
+															   .Select(m => m.PostId)
+															   .FirstOrDefault();
+
 			var newPublication = new Publication
 			{
 				PostId = getPostId.Id
 			};
+
+			if(newPublication.PostId == isExistPostId)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
 
 			_context.Publications.Add(newPublication);
 			_context.SaveChanges();
@@ -174,6 +184,11 @@ namespace PostSys.Controllers
 		{
 			var publicationInDb = _context.Publications.SingleOrDefault(i => i.Id == id);
 
+			if(publicationInDb == null)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
+
 			_context.Publications.Remove(publicationInDb);
 			_context.SaveChanges();
 
@@ -184,14 +199,14 @@ namespace PostSys.Controllers
 		public ActionResult ManageMyPublication()
 		{
 			var getCurrentUserName = User.Identity.GetUserName();
-			var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
+			/*var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
 			var getCourseClass = _context.Courses.Include(c => c.Class).Include(s => s.Student).ToList();
-			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();
+			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();*/
 
 			if(User.IsInRole("Marketing Coordinator"))
 			{
 				var getMyPublication = _context.Publications.Where(u => u.Post.Assignment.Course.Class.Coordinator.UserName == getCurrentUserName)
-															.Include(p => p.Post)
+															.Include(p => p.Post.Assignment.Course.Class.Coordinator)
 															.ToList();
 				return View(getMyPublication);
 			}
@@ -199,7 +214,7 @@ namespace PostSys.Controllers
 			if (User.IsInRole("Student"))
 			{
 				var getMyPublication = _context.Publications.Where(u => u.Post.Assignment.Course.Student.UserName == getCurrentUserName)
-															.Include(p => p.Post)
+															.Include(p => p.Post.Assignment.Course.Student)
 															.ToList();
 				return View(getMyPublication);
 			}
@@ -210,12 +225,12 @@ namespace PostSys.Controllers
 		[Authorize(Roles = "Marketing Manager")]
 		public ActionResult ListComment()
 		{
-			var getComment = _context.Comments.Include(p => p.Post).ToList();
-
-			var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
-			var getAssignmentCourse = _context.Assignments.Include(c => c.Course).ToList();
+			var getComment = _context.Comments.Include(p => p.Post.Assignment.Course.Class.Coordinator).ToList();
 			var getCourseClassStudent = _context.Courses.Include(s => s.Student).Include(c => c.Class).ToList();
-			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();
+			
+			/*var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
+			var getAssignmentCourse = _context.Assignments.Include(c => c.Course).ToList();*/
+			/*var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();*/
 
 			return View(getComment);
 		}
@@ -234,6 +249,12 @@ namespace PostSys.Controllers
 		{
 			var postInDb = _context.Posts.SingleOrDefault(i => i.Id == id);
 
+			var isExist = _context.Comments.Any(d => d.Description == comment.Description);
+			if(isExist == true)
+			{
+				return View("~/Views/ErrorValidations/Exist.cshtml");
+			}
+
 			var newComment = new Comment
 			{
 				Description = comment.Description,
@@ -251,15 +272,15 @@ namespace PostSys.Controllers
 		{
 			var getCurrentUserName = User.Identity.GetUserName();
 
-			var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
+			/*var getPostAssignment = _context.Posts.Include(a => a.Assignment).ToList();
 			var getAssignmentCourse = _context.Assignments.Include(c => c.Course).ToList();
 			var getCourseClassStudent = _context.Courses.Include(s => s.Student).Include(c => c.Class).ToList();
-			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();
+			var getClassCoordinator = _context.Classes.Include(c => c.Coordinator).ToList();*/
 
 			if (User.IsInRole("Marketing Coordinator"))
 			{
 				var getMyCommentCoordinator = _context.Comments.Where(u => u.Post.Assignment.Course.Class.Coordinator.UserName == getCurrentUserName)
-															   .Include(p => p.Post)
+															   .Include(p => p.Post.Assignment.Course.Class.Coordinator)
 															   .ToList();
 
 				return View(getMyCommentCoordinator);
@@ -268,7 +289,7 @@ namespace PostSys.Controllers
 			if (User.IsInRole("Student"))
 			{
 				var getMyCommentCoordinator = _context.Comments.Where(u => u.Post.Assignment.Course.Student.UserName == getCurrentUserName)
-															   .Include(p => p.Post)
+															   .Include(p => p.Post.Assignment.Course.Student)
 															   .ToList();
 
 				return View(getMyCommentCoordinator);
