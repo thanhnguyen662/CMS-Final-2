@@ -131,10 +131,10 @@ namespace PostSys.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult SubmitPost([Bind(Include = "Name, Status, File, UrlFile, PostDate, NameOfFile")] HttpPostedFileBase file, Post post, Assignment assignment, int id)
 		{
-			if (!ModelState.IsValid)
+			/*if (!ModelState.IsValid)
 			{
 				return View("~/Views/ErrorValidations/Exist.cshtml");
-			}
+			}*/
 
 			string extension = Path.GetExtension(file.FileName);
 
