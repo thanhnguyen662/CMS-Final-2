@@ -14,9 +14,9 @@ namespace PostSys.Models
 		public int AssignmentId { get; set; }
 		public Assignment Assignment { get; set; }
 
-		[Required]
+		
 		public byte[] File { get; set; }
-		[Required]
+		
 		public string UrlFile { get; set; }
 		public string NameOfFile { get; set; }
 

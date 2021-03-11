@@ -305,6 +305,10 @@
     <Compile Include="Migrations\202103101042050_AddGuestZoneTable2.Designer.cs">
       <DependentUpon>202103101042050_AddGuestZoneTable2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103111234190_AddPostTable4.cs" />
+    <Compile Include="Migrations\202103111234190_AddPostTable4.Designer.cs">
+      <DependentUpon>202103111234190_AddPostTable4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -537,6 +541,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103101042050_AddGuestZoneTable2.resx">
       <DependentUpon>202103101042050_AddGuestZoneTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103111234190_AddPostTable4.resx">
+      <DependentUpon>202103111234190_AddPostTable4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
