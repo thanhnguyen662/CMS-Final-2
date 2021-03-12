@@ -131,8 +131,8 @@ namespace PostSys.Controllers
 			var facultyName = facultyNames[0];
 
 			var checkIsExist = _context.Courses.Where(m => m.StudentId == currentStudent)
-				                        .Select(m => m.StudentId)
-										.FirstOrDefault();
+				                               .Select(m => m.StudentId)
+										       .FirstOrDefault();
 
 			var newAssign = new Course
 			{

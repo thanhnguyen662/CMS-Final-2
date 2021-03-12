@@ -39,12 +39,6 @@ namespace PostSys.Controllers
 		{
 			var getUserName = User.Identity.GetUserName();
 
-			var isExist = _context.Deadlines.Any(s => s.StartDate == deadline.StartDate && s.EndDate == deadline.EndDate);
-			if(isExist == true)
-			{
-				return View("~/Views/ErrorValidations/Null.cshtml");
-			}
-
 			if (deadline.StartDate >= deadline.EndDate)
 			{
 				return View("~/Views/ErrorValidations/Null.cshtml");

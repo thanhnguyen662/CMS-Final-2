@@ -74,7 +74,7 @@ namespace PostSys.Controllers
 			return View();
 		}
 
-		private bool ValidateExtension(string extension)
+		/*private bool ValidateExtension(string extension)
 		{
 			extension = extension.ToLower();
 			switch (extension)
@@ -92,7 +92,7 @@ namespace PostSys.Controllers
 				default:
 					return false;
 			}
-		}
+		}*/
 
 		[Authorize(Roles = "Student")]
 		[HttpGet]
@@ -126,27 +126,21 @@ namespace PostSys.Controllers
 			return View(newPostAssignmentViewModel);
 		}
 
-		[Authorize(Roles = "Student")]
+		/*[Authorize(Roles = "Student")]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult SubmitPost([Bind(Include = "Name, Status, File, UrlFile, PostDate, NameOfFile")] HttpPostedFileBase file, Post post, Assignment assignment, int id)
 		{
-			/*if (!ModelState.IsValid)
-			{
-				return View("~/Views/ErrorValidations/Exist.cshtml");
-			}*/
-
-			string extension = Path.GetExtension(file.FileName);
+			*//*string extension = Path.GetExtension(file.FileName);
 
 			if (!ValidateExtension(extension))
 			{
 				return View("~/Views/ErrorValidations/Exist.cshtml");
-			}
+			}*//*
 
 			
 			if (file != null && file.ContentLength > 0 )
 			{			
-				//
 				//Get Assignment Name
 				var objAssignment = (from ass in _context.Assignments where ass.Id == id select ass.Name).ToList();
 				var assignmentName = objAssignment[0];
@@ -167,35 +161,118 @@ namespace PostSys.Controllers
 				file.InputStream.Read(post.File, 0, file.ContentLength);
 				string fileName = prepend + System.IO.Path.GetFileName(file.FileName);
 				string urlImage = Server.MapPath("~/Files/" + fileName);
-
 				post.NameOfFile = fileName;
-				
 				file.SaveAs(urlImage);
-
 				post.UrlFile = "Files/" + fileName;
 			}			
 
 			var assignemntInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
 
-			var newPost = new Post
-			{				
-				NameOfFile = post.NameOfFile,
-				AssignmentId = assignemntInDb.Id,
-				Name = post.Name,
-				PostDate = DateTime.Now,
-				File = post.File,
-				UrlFile = post.UrlFile
-			};
-
-			if(newPost.NameOfFile == null || newPost.Name == null || newPost.File == null || newPost.UrlFile == null)
+			if(file == null)
 			{
-				return View("~/Views/ErrorValidations/Exist.cshtml");
+				return View("~/Views/ErrorValidations/Null.cshtml");
 			}
 
-			_context.Posts.Add(newPost);
-			_context.SaveChanges();
+			var validationExtension = System.IO.Path.GetExtension(file.FileName);
+			if(validationExtension == ".jpg" || validationExtension == ".jpeg" || validationExtension == ".png" || 
+			   validationExtension == ".doc" || validationExtension == ".docx" || validationExtension == ".pdf")
+			{
+				var newPost = new Post
+				{
+					NameOfFile = post.NameOfFile,
+					AssignmentId = assignemntInDb.Id,
+					Name = post.Name,
+					PostDate = DateTime.Now,
+					File = post.File,
+					UrlFile = post.UrlFile
+				};
 
-			return View("~/Views/Home/Index.cshtml");
+				_context.Posts.Add(newPost);
+				_context.SaveChanges();
+
+				return View("~/Views/Home/Index.cshtml");
+			}
+			else
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
+		}*/
+
+
+		////////////////////////////////////////////////////////
+		///
+		[Authorize(Roles = "Student")]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult SubmitPost([Bind(Include = "Name, Status, File, UrlFile, PostDate, NameOfFile")] HttpPostedFileBase file, Post post, Assignment assignment, int id)
+		{
+			if (file == null)
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
+			
+			var validationExtension = System.IO.Path.GetExtension(file.FileName);
+			if (validationExtension == ".jpg" || validationExtension == ".jpeg" || validationExtension == ".png" || validationExtension == ".doc" || validationExtension == ".docx" || validationExtension == ".pdf")
+			{
+				if (file != null && file.ContentLength > 0)
+				{
+					//Get Assignment Name
+					var objAssignment = (from ass in _context.Assignments where ass.Id == id select ass.Name).ToList();
+					var assignmentName = objAssignment[0];
+
+					//Get Course Name
+					var objCourse = (from ass in _context.Assignments
+									 where ass.Id == id
+									 join c in _context.Courses
+									 on ass.CourseId equals c.Id
+									 select c.Name).ToList();
+					var courseName = objCourse[0];
+
+					//
+					var userName = User.Identity.GetUserName();
+					string prepend = userName + "-" + assignmentName + "-";
+
+					post.File = new byte[file.ContentLength]; // image stored in binary formate
+					file.InputStream.Read(post.File, 0, file.ContentLength);
+					string fileName = prepend + System.IO.Path.GetFileName(file.FileName);
+					string urlImage = Server.MapPath("~/Files/" + fileName);
+					post.NameOfFile = fileName;
+					file.SaveAs(urlImage);
+					post.UrlFile = "Files/" + fileName;
+				}
+
+				var assignemntInDb = _context.Assignments.SingleOrDefault(i => i.Id == id);
+
+				var newPost = new Post
+				{
+					NameOfFile = post.NameOfFile,
+					AssignmentId = assignemntInDb.Id,
+					Name = post.Name,
+					PostDate = DateTime.Now,
+					File = post.File,
+					UrlFile = post.UrlFile
+				};
+
+				if(newPost.Name == null || newPost.NameOfFile == null || newPost.PostDate == null)
+				{
+					return View("~/Views/ErrorValidations/Null.cshtml");
+				}
+
+				var check = _context.Posts.Where(x => x.NameOfFile.Contains(newPost.NameOfFile)).FirstOrDefault();
+				if(check != null)
+				{
+					return View("~/Views/ErrorValidations/Null.cshtml");
+				}
+
+				_context.Posts.Add(newPost);
+				_context.SaveChanges();
+
+				return View("~/Views/Home/Index.cshtml");
+			}
+			else
+			{
+				return View("~/Views/ErrorValidations/Null.cshtml");
+			}
 		}
 	}
 }

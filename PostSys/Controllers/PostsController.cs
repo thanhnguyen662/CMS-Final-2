@@ -36,7 +36,7 @@ namespace PostSys.Controllers
 			return View(getPost);
 		}
 
-		[Authorize(Roles = "Marketing Coordinator, Student, Marketing Manager")]
+		[Authorize(Roles = "Marketing Coordinator, Student")]
 		public ActionResult DeletePost(int id)
 		{
 			var courseInDb = _context.Posts.SingleOrDefault(c => c.Id == id);
