@@ -36,16 +36,34 @@ namespace PostSys.Controllers
 			return View(getPost);
 		}
 
-		[Authorize(Roles = "Marketing Coordinator, Student")]
+		[Authorize(Roles = "Marketing Coordinator, Student, Marketing Manager")]
 		public ActionResult DeletePost(int id)
 		{
-			var postInDb = _context.Posts.SingleOrDefault(i => i.Id == id);
+			var courseInDb = _context.Posts.SingleOrDefault(c => c.Id == id);
 
-			_context.Posts.Remove(postInDb);
-			_context.SaveChanges();
 
-			return RedirectToAction("ManageMyPost");
+			string rootFolder = Server.MapPath("~/Files/");
+
+			var listFileName = _context.Posts.Where(p => p.Id == id).Select(p => p.NameOfFile).ToList();
+			string nameOfFile = listFileName[0];
+			if(nameOfFile != null)
+			{
+				System.IO.File.Delete(Path.Combine(rootFolder, nameOfFile));
+
+				_context.Posts.Remove(courseInDb);
+				_context.SaveChanges();
+
+				return RedirectToAction("ManageMyPost");
+			}
+			else
+			{
+				_context.Posts.Remove(courseInDb);
+				_context.SaveChanges();
+
+				return RedirectToAction("ManageMyPost");
+			}
 		}
+	
 
 		[Authorize(Roles = "Marketing Coordinator, Student")]
 		public ActionResult ManageMyPost()

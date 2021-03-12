@@ -15,6 +15,7 @@
 			<th>Course Name</th>
 			@if (User.IsInRole("Marketing Coordinator"))
 			{
+				<th>Student Name</th>
 				<th>Delete</th>
 			}
 
@@ -32,6 +33,7 @@
 				<td>@item.Course.Name</td>
 				@if (User.IsInRole("Marketing Coordinator"))
 				{
+					<td>@item.Course.Student.UserName</td>
 					<td>@Html.ActionLink("Delete", "DeleteAssignment", new { id = item.Id })</td>
 				}
 

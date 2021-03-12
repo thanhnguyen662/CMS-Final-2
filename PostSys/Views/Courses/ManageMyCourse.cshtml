@@ -12,7 +12,7 @@
 			<th>Course Name</th>
 			<th>Class Name</th>
 			<th>Student Name</th>
-			@if (User.IsInRole("Marketing Manager"))
+			@if (User.IsInRole("Marketing Coordinator"))
 			{
 				<th>Delete</th>
 			}
@@ -25,7 +25,7 @@
 				<td>@item.Name</td>
 				<td>@item.Class.Name</td>
 				<td>@item.Student.Email</td>
-				@if (User.IsInRole("Marketing Manager"))
+				@if (User.IsInRole("Marketing Coordinator"))
 				{
 					<td>@Html.ActionLink("Delete", "DeleteCourse", new { id = item.Id })</td>
 				}
