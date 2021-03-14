@@ -267,7 +267,8 @@ namespace PostSys.Controllers
 				_context.Posts.Add(newPost);
 				_context.SaveChanges();
 
-				return View("~/Views/Home/Index.cshtml");
+				/*return View("~/Views/Home/Index.cshtml");*/
+				return RedirectToAction("SendEmailToUser", "Posts");
 			}
 			else
 			{
